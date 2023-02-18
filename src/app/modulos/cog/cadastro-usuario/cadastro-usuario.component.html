@@ -2,30 +2,33 @@
 
 <div class="body top-padrao">
     <h4>Cadastro de usuários</h4>
-    <table tablePadrao>
-        <caption>Listagem de Usuários</caption>
-        <thead>
-            <tr theadPadrao>
-                <th>
-                    <botao-adicionar (buscaBotao)="mostrarModalCadastro()" toolTip="Incluir usuário"></botao-adicionar>
-                </th>
-                <th>Id Usuario</th>
-                <th>Login Usuario</th>
-                <th>Senha</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let u of listagemUsuarios">
-                <td>
-                    <botao-editar (buscaBotao)="mostrarModalEdicao(u)" toolTip="Editar usuário"></botao-editar>
-                    <botao-excluir (buscaBotao)="mostrarModalExclusao(u)" toolTip="Excluir usuário"></botao-excluir>
-                </td>
-                <td>{{u.idUsuario}}</td>
-                <td>{{u.login}}</td>
-                <td>{{u.senha}}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="auto">
+        <table tablePadrao>
+            <caption>Listagem de Usuários</caption>
+            <thead>
+                <tr theadPadrao>
+                    <th>
+                        <botao-adicionar (buscaBotao)="mostrarModalCadastro()"
+                            toolTip="Incluir usuário"></botao-adicionar>
+                    </th>
+                    <th>Id Usuario</th>
+                    <th>Login Usuario</th>
+                    <th>Senha</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let u of listagemUsuarios">
+                    <td>
+                        <botao-editar (buscaBotao)="mostrarModalEdicao(u)" toolTip="Editar usuário"></botao-editar>
+                        <botao-excluir (buscaBotao)="mostrarModalExclusao(u)" toolTip="Excluir usuário"></botao-excluir>
+                    </td>
+                    <td>{{u.idUsuario}}</td>
+                    <td>{{u.login}}</td>
+                    <td>{{u.senha}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <modal-cadastro #modalCadastro [modalConfig]="modalCadConfig" [bodyTemplate]="modalCadastroBody">

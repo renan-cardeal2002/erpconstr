@@ -2,30 +2,33 @@
 
 <div class="body top-padrao">
     <h4>Cadastro de equipe</h4>
-    <table tablePadrao>
-        <caption>Listagem de equipes</caption>
-        <thead>
-            <tr theadPadrao>
-                <th>
-                    <botao-adicionar (buscaBotao)="mostrarModalCadastro()" toolTip="Incluir equipe"></botao-adicionar>
-                </th>
-                <th>Id Equipe</th>
-                <th>Equipe</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let e of listagemEquipes">
-                <td>
-                    <botao-editar (buscaBotao)="mostrarModalEdicao(e)" toolTip="Editar equipe">
-                    </botao-editar>
-                    <botao-excluir (buscaBotao)="mostrarModalExclusao(e)" toolTip="Excluir equipe">
-                    </botao-excluir>
-                </td>
-                <td>{{e.idEquipe}}</td>
-                <td>{{e.nome}}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="auto">
+        <table tablePadrao>
+            <caption>Listagem de equipes</caption>
+            <thead>
+                <tr theadPadrao>
+                    <th>
+                        <botao-adicionar (buscaBotao)="mostrarModalCadastro()"
+                            toolTip="Incluir equipe"></botao-adicionar>
+                    </th>
+                    <th>Id Equipe</th>
+                    <th>Equipe</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let e of listagemEquipes">
+                    <td>
+                        <botao-editar (buscaBotao)="mostrarModalEdicao(e)" toolTip="Editar equipe">
+                        </botao-editar>
+                        <botao-excluir (buscaBotao)="mostrarModalExclusao(e)" toolTip="Excluir equipe">
+                        </botao-excluir>
+                    </td>
+                    <td>{{e.idEquipe}}</td>
+                    <td>{{e.nome}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <modal-cadastro #modalCadastro [modalConfig]="modalCadConfig" [bodyTemplate]="modalCadastroBody">

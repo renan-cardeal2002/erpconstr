@@ -2,36 +2,39 @@
 
 <div class="body top-padrao">
     <h4>Cadastro de pessoas</h4>
-    <table tablePadrao>
-        <caption>Listagem de Pessoas</caption>
-        <thead>
-            <tr theadPadrao>
-                <th>
-                    <botao-adicionar (buscaBotao)="mostrarModalCadastro()" toolTip="Incluir pessoa"></botao-adicionar>
-                </th>
-                <th>Id Pessoa</th>
-                <th>Id Equipe</th>
-                <th>Nome</th>
-                <th>Tipo Pessoa</th>
-                <th>Situação</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let p of listagemPessoas">
-                <td>
-                    <botao-editar (buscaBotao)="mostrarModalEdicao(p)" toolTip="Editar pessoa">
-                    </botao-editar>
-                    <botao-excluir (buscaBotao)="mostrarModalExclusao(p)" toolTip="Excluir pessoa">
-                    </botao-excluir>
-                </td>
-                <td>{{p.idPessoa}}</td>
-                <td>{{p.idEquipe}}</td>
-                <td>{{p.nome}}</td>
-                <td>{{p.tipoPessoa}}</td>
-                <td>{{p.situacao}}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="auto">
+        <table tablePadrao>
+            <caption>Listagem de Pessoas</caption>
+            <thead>
+                <tr theadPadrao>
+                    <th>
+                        <botao-adicionar (buscaBotao)="mostrarModalCadastro()"
+                            toolTip="Incluir pessoa"></botao-adicionar>
+                    </th>
+                    <th>Id Pessoa</th>
+                    <th>Id Equipe</th>
+                    <th>Nome</th>
+                    <th>Tipo Pessoa</th>
+                    <th>Situação</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let p of listagemPessoas">
+                    <td>
+                        <botao-editar (buscaBotao)="mostrarModalEdicao(p)" toolTip="Editar pessoa">
+                        </botao-editar>
+                        <botao-excluir (buscaBotao)="mostrarModalExclusao(p)" toolTip="Excluir pessoa">
+                        </botao-excluir>
+                    </td>
+                    <td>{{p.idPessoa}}</td>
+                    <td>{{p.idEquipe}}</td>
+                    <td>{{p.nome}}</td>
+                    <td>{{p.tipoPessoa}}</td>
+                    <td>{{p.situacao}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <modal-cadastro #modalCadastro [modalConfig]="modalCadConfig" [bodyTemplate]="modalCadastroBody">

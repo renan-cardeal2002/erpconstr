@@ -2,28 +2,31 @@
 
 <div class="body top-padrao">
     <h4>Cadastro de produtos</h4>
-    <table tablePadrao>
-        <caption>Listagem de Produtos</caption>
-        <thead>
-            <tr theadPadrao>
-                <th>
-                    <botao-adicionar (buscaBotao)="mostrarModalCadastro()" toolTip="Incluir produto"></botao-adicionar>
-                </th>
-                <th>Id Produto</th>
-                <th>Descrição Produto</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let p of listagemProdutos">
-                <td>
-                    <botao-editar (buscaBotao)="mostrarModalEdicao(p)" toolTip="Editar produto"></botao-editar>
-                    <botao-excluir (buscaBotao)="mostrarModalExclusao(p)" toolTip="Excluir produto"></botao-excluir>
-                </td>
-                <td>{{p.idProduto}}</td>
-                <td>{{p.descricaoProduto}}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="auto">
+        <table tablePadrao>
+            <caption>Listagem de Produtos</caption>
+            <thead>
+                <tr theadPadrao>
+                    <th>
+                        <botao-adicionar (buscaBotao)="mostrarModalCadastro()"
+                            toolTip="Incluir produto"></botao-adicionar>
+                    </th>
+                    <th>Id Produto</th>
+                    <th>Descrição Produto</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let p of listagemProdutos">
+                    <td>
+                        <botao-editar (buscaBotao)="mostrarModalEdicao(p)" toolTip="Editar produto"></botao-editar>
+                        <botao-excluir (buscaBotao)="mostrarModalExclusao(p)" toolTip="Excluir produto"></botao-excluir>
+                    </td>
+                    <td>{{p.idProduto}}</td>
+                    <td>{{p.descricaoProduto}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <modal-cadastro #modalCadastro [modalConfig]="modalCadConfig" [bodyTemplate]="modalCadastroBody">

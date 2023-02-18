@@ -12,6 +12,7 @@ export abstract class BasicComponent {
   @Input() toolTip: string = '';
   @Input() disabled: string;
   @Input() label: string = '';
+  @Input() visualizar: boolean;
 
   funcao() {
     this.buscaBotao.emit();

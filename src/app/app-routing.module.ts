@@ -4,6 +4,7 @@ import { CadastroEquipeComponent } from './modulos/cog/cadastro-equipe/cadastro-
 import { CadastroPessoaComponent } from './modulos/cog/cadastro-pessoa/cadastro-pessoa.component';
 import { CadastroTipoPagamentoComponent } from './modulos/cog/cadastro-tipo-pagamento/cadastro-tipo-pagamento.component';
 import { CadastroUsuarioComponent } from './modulos/cog/cadastro-usuario/cadastro-usuario.component';
+import { CadastroComprasComponent } from './modulos/cpa/cadastro-compras/cadastro-compras.component';
 import { HomeComponent } from './modulos/home/home.component';
 import { LoginComponent } from './modulos/login/login.component';
 
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path: 'CADEQUIPE',
     component: CadastroEquipeComponent,
+  },
+  {
+    path: 'CADCOMPRAS',
+    component: CadastroComprasComponent,
   },
 ];
 

@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { BasicModulos } from 'src/app/classes/basic-modulos';
 import { ModalCadastroComponent } from 'src/app/componentes/modais/modal-cadastro/modal-cadastro.component';
 import { ModalCadastroConfig } from 'src/app/componentes/modais/modal-cadastro/modal-cadastro.config';
 import { ModalExclusaoComponent } from 'src/app/componentes/modais/modal-exclusao/modal-exclusao.component';
@@ -42,10 +41,12 @@ export class CadastroEquipeComponent implements OnInit {
   }
   async mostrarModalCadastro() {
     this.formCadastro = {};
+    this.formCadastro.tipoInclusao = 'I';
     return await this.modalCadastro.open();
   }
   async mostrarModalEdicao(registro) {
     this.formCadastro = registro;
+    this.formCadastro.tipoInclusao = 'E';
     return await this.modalCadastro.open();
   }
 }

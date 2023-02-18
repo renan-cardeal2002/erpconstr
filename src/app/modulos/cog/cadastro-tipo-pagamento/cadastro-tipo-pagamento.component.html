@@ -6,7 +6,7 @@
         <thead>
             <tr theadPadrao>
                 <th>
-                    <botao-adicionar toolTip="Incluir equipe"></botao-adicionar>
+                    <botao-adicionar (buscaBotao)="mostrarModalCadastro()" toolTip="Incluir equipe"></botao-adicionar>
                 </th>
                 <th>Id Tipo Pagamento</th>
                 <th>Tipo Pagamento</th>
@@ -15,9 +15,9 @@
         <tbody>
             <tr *ngFor="let t of listagemTiposPagamento">
                 <td>
-                    <botao-editar toolTip="Editar equipe">
+                    <botao-editar (buscaBotao)="mostrarModalEdicao(t)" toolTip="Editar equipe">
                     </botao-editar>
-                    <botao-excluir toolTip="Excluir equipe">
+                    <botao-excluir (buscaBotao)="mostrarModalExclusao(t)" toolTip="Excluir equipe">
                     </botao-excluir>
                 </td>
                 <th>{{t.idTipoPagamento}}</th>
@@ -26,3 +26,22 @@
         </tbody>
     </table>
 </div>
+
+<modal-cadastro #modalCadastro [modalConfig]="modalCadConfig" [bodyTemplate]="modalCadastroBody">
+</modal-cadastro>
+<ng-template #modalCadastroBody>
+    <div class="row">
+        <div class="col-xl-4">
+            <label>Id Tipo Pagamento</label>
+            <input class="form-control" type="text" [(ngModel)]="formCadastro.idTipoPagamento" maxlength="3"
+                [disabled]="formCadastro.tipoInclusao == 'E'">
+        </div>
+        <div class="col-xl-8">
+            <label>Tipo Pagamento</label>
+            <input class="form-control" type="text" [(ngModel)]="formCadastro.tipoPagamento" maxlength="20">
+        </div>
+    </div>
+</ng-template>
+<modal-exclusao #modalExclusao [modalConfig]="modalExcConfig">
+    Deseja realmente excluir o item selecionado?
+</modal-exclusao>

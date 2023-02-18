@@ -11,6 +11,7 @@ import { CadastroPessoaComponent } from './cog/cadastro-pessoa/cadastro-pessoa.c
 import { CadastroUsuarioComponent } from './cog/cadastro-usuario/cadastro-usuario.component';
 import { CadastroEquipeComponent } from './cog/cadastro-equipe/cadastro-equipe.component';
 import { CadastroTipoPagamentoComponent } from './cog/cadastro-tipo-pagamento/cadastro-tipo-pagamento.component';
+import { CadastroComprasComponent } from './cpa/cadastro-compras/cadastro-compras.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { CadastroTipoPagamentoComponent } from './cog/cadastro-tipo-pagamento/ca
     CadastroUsuarioComponent,
     CadastroEquipeComponent,
     CadastroTipoPagamentoComponent,
+    CadastroComprasComponent,
   ],
   imports: [CommonModule, ComponentesModule, FormsModule, NgbModule],
 })

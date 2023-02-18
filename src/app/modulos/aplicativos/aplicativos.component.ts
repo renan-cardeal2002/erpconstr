@@ -10,7 +10,10 @@ export class AplicativosComponent implements OnInit {
   public dragging = false;
   public carregando = false;
 
-  public sistemas = [{ codSistema: 'COG', nome: 'Controles Gerais' }];
+  public sistemas = [
+    { codSistema: 'COG', nome: 'Controles Gerais' },
+    { codSistema: 'CPA', nome: 'Compras' },
+  ];
   public aplicativos: any = [];
   public aplicativosFavoritos = [
     {
@@ -32,6 +35,11 @@ export class AplicativosComponent implements OnInit {
       codSistema: 'COG',
       codAplicativo: 'CADEQUIPE',
       nome: 'Cadastro de equipe',
+    },
+    {
+      codSistema: 'CPA',
+      codAplicativo: 'CADCOMPRAS',
+      nome: 'Cadastro de compras',
     },
   ];
   constructor(private router: Router) {}
@@ -102,7 +110,6 @@ export class AplicativosComponent implements OnInit {
     console.log(sistema);
   }
   selecionarAplicativo(aplicativo: any) {
-    console.log(aplicativo);
     this.router.navigate([`/${aplicativo.codAplicativo}`]);
   }
   buscarSistemas() {}

@@ -84,10 +84,12 @@ export class CadastroPessoaComponent extends BasicModulos implements OnInit {
   }
   async mostrarModalCadastro() {
     this.formCadastro = {};
+    this.formCadastro.tipoInclusao = 'I';
     return await this.modalCadastro.open();
   }
   async mostrarModalEdicao(registro) {
     this.formCadastro = registro;
+    this.formCadastro.tipoInclusao = 'E';
     return await this.modalCadastro.open();
   }
 }

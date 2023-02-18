@@ -1,0 +1,84 @@
+<header-padrao></header-padrao>
+
+<div class="body top-padrao">
+    <h4>Cadastro de compras</h4>
+    <table tablePadrao>
+        <thead>
+            <tr theadPadrao>
+                <th>
+                    <botao-adicionar (buscaBotao)="mostrarModalCadastro()" toolTip="Incluir usuário"></botao-adicionar>
+                </th>
+                <th>Id Compra</th>
+                <th>Fornecedor</th>
+                <th>Descrição</th>
+                <th>Previsão entrega</th>
+                <th>Data recebimento</th>
+                <th>Total da Compra</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let c of listagemCompras">
+            <tr>
+                <td>
+                    <botao-editar (buscaBotao)="mostrarModalEdicao(c)" toolTip="Editar compra"></botao-editar>
+                    <botao-excluir (buscaBotao)="mostrarModalExclusao(c)" toolTip="Excluir compra"></botao-excluir>
+                    <botao-visualizar [visualizar]="c.visualizar" (buscaBotao)="mostrarProdutosCompra(c)">
+                    </botao-visualizar>
+                </td>
+                <td>{{c.idCompra}}</td>
+                <td>{{c.idPessoa}}</td>
+                <td>{{c.descricao}}</td>
+                <td>{{c.previsaoEntrega}}</td>
+                <td>{{c.dataRecebimento}}</td>
+                <td>{{c.valorTotal}}</td>
+                <td>{{c.status}}</td>
+            </tr>
+            <tr *ngIf="c.visualizar">
+                <td colspan="100%">
+                    <table tablePadrao>
+                        <thead>
+                            <tr>
+                                <th>Id Produto</th>
+                                <th>Descrição</th>
+                                <th>Quantidade</th>
+                                <th>Valor Unitário</th>
+                                <th>Valor Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let p of listagemProdutosCompra">
+                                <td>{{p.idProduto}}</td>
+                                <td>{{p.descricaoProduto}}</td>
+                                <td>{{p.qtd}}</td>
+                                <td>{{p.valorUnitario}}</td>
+                                <td>{{p.valorTotal}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<modal-cadastro #modalCadastro [modalConfig]="modalCadConfig" [bodyTemplate]="modalCadastroBody">
+</modal-cadastro>
+<ng-template #modalCadastroBody>
+    <div class="row">
+        <div class="col-xl-2">
+            <label>Id Compra</label>
+            <input class="form-control" type="number" [(ngModel)]="formCadastro.idCompra" [disabled]="true">
+        </div>
+        <div class="col-xl-5">
+            <label>Descrição</label>
+            <input class="form-control" type="text" [(ngModel)]="formCadastro.descricao" maxlength="30">
+        </div>
+        <div class="col-xl-5">
+            <label>Previsão entrega</label>
+            <input class="form-control" type="date" [(ngModel)]="formCadastro.previsaoEntrega">
+        </div>
+    </div>
+</ng-template>
+<modal-exclusao #modalExclusao [modalConfig]="modalExcConfig">
+    Deseja realmente excluir o item selecionado?
+</modal-exclusao>

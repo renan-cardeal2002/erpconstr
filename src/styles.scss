@@ -4,6 +4,7 @@
     --font-padrao: 10px;
     --cor-principal: #5a7eaa;
     --backgroud-primario: #b7c1ca;
+    --height-padrao: 100vh;
 }
 .dark-mode:root {
     --cor-principal: #292929;
@@ -16,7 +17,7 @@
     max-width: 1920px;
 }
 body {
-
+    height: var(--height-padrao);
     background-color: var(--backgroud-primario);
 }
 

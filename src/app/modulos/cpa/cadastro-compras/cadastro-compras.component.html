@@ -6,11 +6,12 @@
         <thead>
             <tr theadPadrao>
                 <th>
-                    <botao-adicionar (buscaBotao)="mostrarModalCadastro()" toolTip="Incluir usuário"></botao-adicionar>
+                    <botao-adicionar (buscaBotao)="mostrarModalCadastro()" toolTip="Incluir compra"></botao-adicionar>
                 </th>
                 <th>Id Compra</th>
                 <th>Fornecedor</th>
                 <th>Descrição</th>
+                <th>Data Compra</th>
                 <th>Previsão entrega</th>
                 <th>Data recebimento</th>
                 <th>Total da Compra</th>
@@ -28,6 +29,7 @@
                 <td>{{c.idCompra}}</td>
                 <td>{{c.idPessoa}}</td>
                 <td>{{c.descricao}}</td>
+                <td>{{c.dataCompra}}</td>
                 <td>{{c.previsaoEntrega}}</td>
                 <td>{{c.dataRecebimento}}</td>
                 <td>{{c.valorTotal}}</td>

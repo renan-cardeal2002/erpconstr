@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CadastroEquipeComponent } from './modulos/cog/cadastro-equipe/cadastro-equipe.component';
 import { CadastroPessoaComponent } from './modulos/cog/cadastro-pessoa/cadastro-pessoa.component';
+import { CadastroProdutosComponent } from './modulos/cog/cadastro-produtos/cadastro-produtos.component';
 import { CadastroTipoPagamentoComponent } from './modulos/cog/cadastro-tipo-pagamento/cadastro-tipo-pagamento.component';
 import { CadastroUsuarioComponent } from './modulos/cog/cadastro-usuario/cadastro-usuario.component';
 import { CadastroComprasComponent } from './modulos/cpa/cadastro-compras/cadastro-compras.component';
@@ -36,6 +37,10 @@ const routes: Routes = [
   {
     path: 'CADCOMPRAS',
     component: CadastroComprasComponent,
+  },
+  {
+    path: 'CADPRODUTO',
+    component: CadastroProdutosComponent,
   },
 ];
 

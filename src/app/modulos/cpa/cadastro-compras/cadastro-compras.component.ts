@@ -24,6 +24,7 @@ export class CadastroComprasComponent implements OnInit {
     idCompra: number;
     idPessoa: number;
     descricao: string;
+    dataCompra: string;
     previsaoEntrega: string;
     dataRecebimento: string;
     valorTotal: number;
@@ -36,6 +37,7 @@ export class CadastroComprasComponent implements OnInit {
   public formCadastro: any = {};
   public formExclusao: any = {};
   public abas = [{ nome: 'Produtos' }, { nome: 'Pagamentos' }];
+
   constructor() {}
 
   ngOnInit(): void {
@@ -46,7 +48,8 @@ export class CadastroComprasComponent implements OnInit {
       idCompra: 1,
       idPessoa: 1,
       descricao: 'Compra de materiais eletricos',
-      previsaoEntrega: '25/02/2023',
+      dataCompra: '2023-02-18',
+      previsaoEntrega: '2023-02-25',
       dataRecebimento: '',
       valorTotal: 200.5,
       visualizar: false,
@@ -71,7 +74,7 @@ export class CadastroComprasComponent implements OnInit {
       idPagamento: 1,
       idTipoPagamento: 'PIX',
       seqPagamento: 1,
-      dataPagamento: '18/02/2023',
+      dataPagamento: '2023-02-18',
       valorPagamento: 200.5,
       status: 'Pago',
       observacao: '',

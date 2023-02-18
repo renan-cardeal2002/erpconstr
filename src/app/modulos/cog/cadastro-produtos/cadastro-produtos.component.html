@@ -1,0 +1,44 @@
+<header-padrao></header-padrao>
+
+<div class="body top-padrao">
+    <h4>Cadastro de produtos</h4>
+    <table tablePadrao>
+        <thead>
+            <tr theadPadrao>
+                <th>
+                    <botao-adicionar (buscaBotao)="mostrarModalCadastro()" toolTip="Incluir produto"></botao-adicionar>
+                </th>
+                <th>Id Produto</th>
+                <th>Descrição Produto</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let p of listagemProdutos">
+                <td>
+                    <botao-editar (buscaBotao)="mostrarModalEdicao(p)" toolTip="Editar produto"></botao-editar>
+                    <botao-excluir (buscaBotao)="mostrarModalExclusao(p)" toolTip="Excluir produto"></botao-excluir>
+                </td>
+                <td>{{p.idProduto}}</td>
+                <td>{{p.descricaoProduto}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<modal-cadastro #modalCadastro [modalConfig]="modalCadConfig" [bodyTemplate]="modalCadastroBody">
+</modal-cadastro>
+<ng-template #modalCadastroBody>
+    <div class="row">
+        <div class="col-xl-4">
+            <label>Id Produto</label>
+            <input class="form-control" type="number" [(ngModel)]="formCadastro.idProduto" [disabled]="true">
+        </div>
+        <div class="col-xl-8">
+            <label>Descrição Produto</label>
+            <input class="form-control" type="text" [(ngModel)]="formCadastro.descricaoProduto" maxlength="30">
+        </div>
+    </div>
+</ng-template>
+<modal-exclusao #modalExclusao [modalConfig]="modalExcConfig">
+    Deseja realmente excluir o item selecionado?
+</modal-exclusao>

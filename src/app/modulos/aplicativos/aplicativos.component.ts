@@ -37,6 +37,11 @@ export class AplicativosComponent implements OnInit {
       nome: 'Cadastro de equipe',
     },
     {
+      codSistema: 'COG',
+      codAplicativo: 'CADPRODUTO',
+      nome: 'Cadastro de produtos',
+    },
+    {
       codSistema: 'CPA',
       codAplicativo: 'CADCOMPRAS',
       nome: 'Cadastro de compras',

@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TabsComponent } from './tabs/tabs.component';
 import { TablePadraoDirective } from '../directives/table-padrao.directive';
+import { TheadPadraoDirective } from '../directives/thead-padrao.directive';
 import { BotaoAdicionarComponent } from './botoes/botao-adicionar/botao-adicionar.component';
 import { BotaoExcluirComponent } from './botoes/botao-excluir/botao-excluir.component';
 import { BotaoEditarComponent } from './botoes/botao-editar/botao-editar.component';
@@ -21,6 +22,7 @@ import { BotaoCancelarComponent } from './botoes/botao-cancelar/botao-cancelar.c
     HeaderComponent,
     TabsComponent,
     TablePadraoDirective,
+    TheadPadraoDirective,
     BotaoAdicionarComponent,
     BotaoExcluirComponent,
     BotaoEditarComponent,
@@ -37,6 +39,7 @@ import { BotaoCancelarComponent } from './botoes/botao-cancelar/botao-cancelar.c
     HeaderComponent,
     TabsComponent,
     TablePadraoDirective,
+    TheadPadraoDirective,
     BotaoAdicionarComponent,
     BotaoExcluirComponent,
     BotaoEditarComponent,

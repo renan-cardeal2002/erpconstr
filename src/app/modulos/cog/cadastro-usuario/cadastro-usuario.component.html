@@ -4,23 +4,47 @@
     <h4>Cadastro de usuários</h4>
     <table tablePadrao>
         <thead>
-            <tr class="table-dark">
-                <th><botao-adicionar></botao-adicionar></th>
+            <tr theadPadrao>
+                <th>
+                    <botao-adicionar (buscaBotao)="mostrarModalCadastro()" toolTip="Incluir usuário"></botao-adicionar>
+                </th>
                 <th>Id Usuario</th>
-                <th>Id Pessoa</th>
-                <th>Usuario</th>
+                <th>Login Usuario</th>
+                <th>Senha</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
+            <tr *ngFor="let u of listagemUsuarios">
                 <td>
-                    <botao-editar></botao-editar>
-                    <botao-excluir></botao-excluir>
+                    <botao-editar (buscaBotao)="mostrarModalEdicao(u)" toolTip="Editar usuário"></botao-editar>
+                    <botao-excluir (buscaBotao)="mostrarModalExclusao(u)" toolTip="Excluir usuário"></botao-excluir>
                 </td>
-                <td>1</td>
-                <td>1</td>
-                <td>Renan</td>
+                <td>{{u.idUsuario}}</td>
+                <td>{{u.login}}</td>
+                <td>{{u.senha}}</td>
             </tr>
         </tbody>
     </table>
 </div>
+
+<modal-cadastro #modalCadastro [modalConfig]="modalCadConfig" [bodyTemplate]="modalCadastroBody">
+</modal-cadastro>
+<ng-template #modalCadastroBody>
+    <div class="row">
+        <div class="col-xl-2">
+            <label>Id Usuário</label>
+            <input class="form-control" type="number" [(ngModel)]="formCadastro.idUsuario" [disabled]="true">
+        </div>
+        <div class="col-xl-5">
+            <label>Login Usuário</label>
+            <input class="form-control" type="text" [(ngModel)]="formCadastro.login">
+        </div>
+        <div class="col-xl-5">
+            <label>Senha</label>
+            <input class="form-control" type="text" [(ngModel)]="formCadastro.senha">
+        </div>
+    </div>
+</ng-template>
+<modal-exclusao #modalExclusao [modalConfig]="modalExcConfig">
+    Deseja realmente excluir o item selecionado?
+</modal-exclusao>

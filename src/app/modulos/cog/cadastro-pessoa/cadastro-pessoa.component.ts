@@ -3,6 +3,7 @@ import { BasicModulos } from 'src/app/classes/basic-modulos';
 import { ModalCadastroComponent } from 'src/app/componentes/modais/modal-cadastro/modal-cadastro.component';
 import { ModalCadastroConfig } from 'src/app/componentes/modais/modal-cadastro/modal-cadastro.config';
 import { ModalExclusaoComponent } from 'src/app/componentes/modais/modal-exclusao/modal-exclusao.component';
+import { ModalExclusaoConfig } from 'src/app/componentes/modais/modal-exclusao/modal-exclusao.config';
 import { ModalMensagemComponent } from 'src/app/componentes/modais/modal-mensagem/modal-mensagem.component';
 import { ModalMensagemConfig } from 'src/app/componentes/modais/modal-mensagem/modal-mensagem.config';
 
@@ -12,7 +13,7 @@ import { ModalMensagemConfig } from 'src/app/componentes/modais/modal-mensagem/m
   styleUrls: ['./cadastro-pessoa.component.scss'],
 })
 export class CadastroPessoaComponent extends BasicModulos implements OnInit {
-  @Input() public modalExcConfig: ModalMensagemConfig = {
+  @Input() public modalExcConfig: ModalExclusaoConfig = {
     modalTitle: 'Atenção',
   };
 

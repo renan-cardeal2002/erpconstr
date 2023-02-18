@@ -9,6 +9,8 @@ import { AplicativosComponent } from './aplicativos/aplicativos.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CadastroPessoaComponent } from './cog/cadastro-pessoa/cadastro-pessoa.component';
 import { CadastroUsuarioComponent } from './cog/cadastro-usuario/cadastro-usuario.component';
+import { CadastroEquipeComponent } from './cog/cadastro-equipe/cadastro-equipe.component';
+import { CadastroTipoPagamentoComponent } from './cog/cadastro-tipo-pagamento/cadastro-tipo-pagamento.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,8 @@ import { CadastroUsuarioComponent } from './cog/cadastro-usuario/cadastro-usuari
     DashboardComponent,
     CadastroPessoaComponent,
     CadastroUsuarioComponent,
+    CadastroEquipeComponent,
+    CadastroTipoPagamentoComponent,
   ],
   imports: [CommonModule, ComponentesModule, FormsModule, NgbModule],
 })

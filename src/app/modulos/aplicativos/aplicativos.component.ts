@@ -23,6 +23,16 @@ export class AplicativosComponent implements OnInit {
       codAplicativo: 'CADUSUARIO',
       nome: 'Cadastro de usuario',
     },
+    {
+      codSistema: 'COG',
+      codAplicativo: 'CADTIPOPAGAMENTO',
+      nome: 'Cadastro de tipo de pagamento',
+    },
+    {
+      codSistema: 'COG',
+      codAplicativo: 'CADEQUIPE',
+      nome: 'Cadastro de equipe',
+    },
   ];
   constructor(private router: Router) {}
 

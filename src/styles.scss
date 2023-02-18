@@ -1,1 +1,99 @@
 /* You can add global styles to this file, and also import other style files */
+
+:root {
+    --font-padrao: 10px;
+    --cor-principal: #5a7eaa;
+    --backgroud-primario: #b7c1ca;
+}
+.dark-mode:root {
+    --cor-principal: #292929;
+    --backgroud-primario: #5a6168;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    max-width: 1920px;
+}
+body {
+
+    background-color: var(--backgroud-primario);
+}
+
+.selector-for-some-widget {
+    box-sizing: content-box;
+}
+
+label {
+    display: flex;
+    margin-bottom: 0px;
+    font-weight: bold;
+}
+.center {
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+}
+.top-padrao {
+    margin-top: 1%;
+}
+.no-dropdrown-caret::after {
+    width: 0 !important;
+    height: 0 !important;
+    margin-left: 0 !important;
+    vertical-align: 0 !important;
+    content: "" !important;
+    border-top: 0 !important;
+    border-right: 0 !important;
+    border-bottom: 0 !important;
+    border-left: 0 !important;
+}
+
+.body {
+    padding: 0 2%;
+}
+.margin-1 {
+    margin-right: 1px;
+}
+
+.btn-xs {
+    padding: 1px 5px;
+    font-size: var(--font-padrao);
+    line-height: 1.5;
+    border-radius: 3px;
+}
+
+
+.table-padrao label {
+    margin: 0;
+}
+.table-padrao {
+    color: var(--color-font);
+    background-color: var(--cor-tabela-primario);
+}
+.table, td, th {
+    white-space: nowrap;
+}
+.table-header-sticky > thead > tr > th {
+    position: sticky;
+    top: var(--top-position);
+    white-space: nowrap;
+    z-index: 80;
+}
+.table-header-sticky > tfoot > tr > td {
+    position: sticky;
+    bottom: var(--top-position);
+}
+.cabecalho-fixo {
+    margin-bottom: 0;
+    --top-position: -1px;
+}
+.table-bordered td, .table-bordered th, .table-bordered tbody {
+    border: 1px solid #d3d2d2 !important;
+    border-collapse: collapse;
+}
+.table-info {
+    z-index: 80;
+    position: relative
+}

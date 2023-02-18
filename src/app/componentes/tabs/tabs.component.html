@@ -1,0 +1,10 @@
+<ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs ul-margin" [destroyOnHide]="false" [keyboard]="true">
+    <li *ngFor="let tab of tabs; let i = index" [ngbNavItem]="i" [title]="tab.aplicativo.nome">
+        <a ngbNavLink class="custom-nav-link">
+            <div class="tab-name">{{tab.aplicativo.nome}}</div>
+            <span *ngIf="i!=0" class="close position-relative pl-2 font-weight-light"
+                (click)="closeTab($event,i)">×</span>
+        </a>
+    </li>
+</ul>
+<div [ngbNavOutlet]="nav" class="mt-2"></div>

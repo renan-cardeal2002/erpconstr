@@ -1,0 +1,35 @@
+<div class="row">
+    <div class="col-xl-3">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#expandirAppsFav"
+            aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+            <p>Aplicativos favoritos</p>
+        </button>
+    </div>
+    <div class="col-xl-12 collapse show" id="expandirAppsFav">
+        <div class="favoritos top-padrao" *ngIf="aplicativosFavoritos.length > 0">
+            <div *ngFor="let a of aplicativosFavoritos; let i = index">
+                <div class="atalho-favorito" [ngStyle]="{'background-color':getColor(a)}" [title]="a.nome"
+                    (click)="selecionarAplicativo(a)">
+                    {{a.nome}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xl-3">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#expandirSistemas"
+            aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+            <p>Sistemas</p>
+        </button>
+    </div>
+    <div class="col-xl-12 collapse" id="expandirSistemas">
+        <div class="favoritos top-padrao">
+            <div class="botao-menu" [ngStyle]="{'background-color':getColor(s)}" *ngFor="let s of sistemas"
+                (click)="selecionarSistema(s)">
+                <label>{{s.nome}}</label>
+            </div>
+        </div>
+    </div>
+</div>

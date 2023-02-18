@@ -1,0 +1,53 @@
+.sistemas {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 21px;
+}
+
+.botao-menu {
+    width: 180px;
+    margin: 5px;
+    height: 70px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background-color: red;
+    border-radius: 3px;
+    border: 1px solid transparent;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.favoritos {
+    display: flex;
+    justify-content: center;
+    overflow: auto;
+    min-height: 77px;
+    max-height: 190px;
+    border: 1px solid #dadada;
+    border-radius: 5px;
+    box-shadow: 0px 1px 1px -3px;
+    padding:1rem;
+}
+.favoritos::-webkit-scrollbar {
+    display: none;
+}
+.atalho-favorito {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5%;
+    height: 65px;
+    background-color: red;
+    margin: 5px;
+    padding: 1rem;
+    box-shadow: 1px 1px 3px -1px black;
+    font-size: 1rem;
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+    cursor: pointer;
+}

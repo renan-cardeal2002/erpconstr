@@ -1,0 +1,14 @@
+<ng-template #modalMensagem>
+    <div class="modal-header">
+        <h5 class="modal-title">{{ modalConfig.modalTitle }}</h5>
+        <botao-close (buscaBotao)="close()"></botao-close>
+    </div>
+    <div class="modal-body">
+        <ng-content></ng-content>
+    </div>
+    <div class="modal-footer">
+        <botao-primario *ngIf="modalConfig.hideCloseButton === undefined || !modalConfig.hideCloseButton()"
+            [label]="modalConfig.closeButtonLabel" (buscaBotao)="funcao()">
+        </botao-primario>
+    </div>
+</ng-template>

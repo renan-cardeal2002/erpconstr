@@ -5,7 +5,24 @@
     <table tablePadrao>
         <thead>
             <tr theadPadrao>
+                <th>
+                    <botao-adicionar toolTip="Incluir equipe"></botao-adicionar>
+                </th>
+                <th>Id Tipo Pagamento</th>
+                <th>Tipo Pagamento</th>
             </tr>
         </thead>
+        <tbody>
+            <tr *ngFor="let t of listagemTiposPagamento">
+                <td>
+                    <botao-editar toolTip="Editar equipe">
+                    </botao-editar>
+                    <botao-excluir toolTip="Excluir equipe">
+                    </botao-excluir>
+                </td>
+                <th>{{t.idTipoPagamento}}</th>
+                <th>{{t.tipoPagamento}}</th>
+            </tr>
+        </tbody>
     </table>
 </div>

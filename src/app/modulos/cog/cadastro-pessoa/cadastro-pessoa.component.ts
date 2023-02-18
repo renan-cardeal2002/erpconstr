@@ -33,7 +33,13 @@ export class CadastroPessoaComponent extends BasicModulos implements OnInit {
   public mensagem: string;
   public formExclusao: string;
   public formCadastro: any;
-  public listagemPessoas: { idPessoa: number; nome: string }[] = [];
+  public listagemPessoas: {
+    idPessoa: number;
+    idEquipe: number;
+    nome: string;
+    tipoPessoa: string;
+    situacao: string;
+  }[] = [];
 
   constructor() {
     super();
@@ -44,8 +50,27 @@ export class CadastroPessoaComponent extends BasicModulos implements OnInit {
 
   async buscarPessoas() {
     this.carregando = true;
-    this.listagemPessoas.push({ idPessoa: 1, nome: 'Renan' });
-    console.log('buscou');
+    this.listagemPessoas.push({
+      idPessoa: 1,
+      idEquipe: 1,
+      nome: 'Renan',
+      tipoPessoa: 'E',
+      situacao: 'A',
+    });
+    this.listagemPessoas.push({
+      idPessoa: 2,
+      idEquipe: 1,
+      nome: 'João',
+      tipoPessoa: 'O',
+      situacao: 'A',
+    });
+    this.listagemPessoas.push({
+      idPessoa: 3,
+      idEquipe: 1,
+      nome: 'Luiz',
+      tipoPessoa: 'O',
+      situacao: 'A',
+    });
     this.carregando = false;
   }
 

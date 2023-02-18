@@ -47,7 +47,6 @@ export class CadastroUsuarioComponent extends BasicModulos implements OnInit {
     return await this.modalCadastro.open();
   }
   async mostrarModalEdicao(registro) {
-    console.log(registro, 'chamou');
     this.formCadastro = registro;
     return await this.modalCadastro.open();
   }

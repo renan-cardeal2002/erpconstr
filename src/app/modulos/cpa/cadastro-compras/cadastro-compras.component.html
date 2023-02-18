@@ -35,26 +35,63 @@
             </tr>
             <tr *ngIf="c.visualizar">
                 <td colspan="100%">
-                    <table tablePadrao>
-                        <thead>
-                            <tr>
-                                <th>Id Produto</th>
-                                <th>Descrição</th>
-                                <th>Quantidade</th>
-                                <th>Valor Unitário</th>
-                                <th>Valor Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let p of listagemProdutosCompra">
-                                <td>{{p.idProduto}}</td>
-                                <td>{{p.descricaoProduto}}</td>
-                                <td>{{p.qtd}}</td>
-                                <td>{{p.valorUnitario}}</td>
-                                <td>{{p.valorTotal}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <ul ngbNav #nav="ngbNav" [(activeId)]="c.active" orientation="horizontal"
+                        class="nav-tabs ul-margin">
+                        <li *ngFor="let modulo of abas; let i = index" [ngbNavItem]="i">
+                            <a ngbNavLink style="font-size: 13px;" class="custom-nav-link">
+                                {{modulo.nome}}
+                            </a>
+                            <ng-template ngbNavContent *ngIf="i == 0">
+                                <table tablePadrao>
+                                    <thead>
+                                        <tr>
+                                            <th>Id Produto</th>
+                                            <th>Descrição</th>
+                                            <th>Quantidade</th>
+                                            <th>Valor Unitário</th>
+                                            <th>Valor Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let p of listagemProdutosCompra">
+                                            <td>{{p.idProduto}}</td>
+                                            <td>{{p.descricaoProduto}}</td>
+                                            <td>{{p.qtd}}</td>
+                                            <td>{{p.valorUnitario}}</td>
+                                            <td>{{p.valorTotal}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </ng-template>
+                            <ng-template ngbNavContent *ngIf="i == 1">
+                                <table tablePadrao>
+                                    <thead>
+                                        <tr>
+                                            <th>Id Pagamento</th>
+                                            <th>Tipo Pagamento</th>
+                                            <th>Seq.</th>
+                                            <th>Data</th>
+                                            <th>Valor</th>
+                                            <th>Status</th>
+                                            <th>Observação</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let p of listagemPagamentosCompra">
+                                            <td>{{p.idPagamento}}</td>
+                                            <td>{{p.idTipoPagamento}}</td>
+                                            <td>{{p.seqPagamento}}</td>
+                                            <td>{{p.dataPagamento}}</td>
+                                            <td>{{p.valorPagamento}}</td>
+                                            <td>{{p.status}}</td>
+                                            <td>{{p.observacao}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </ng-template>
+                        </li>
+                    </ul>
+                    <div [ngbNavOutlet]="nav" class="mt-2"></div>
                 </td>
             </tr>
         </tbody>

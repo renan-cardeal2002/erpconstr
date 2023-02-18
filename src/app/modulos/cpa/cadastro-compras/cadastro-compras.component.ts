@@ -29,11 +29,13 @@ export class CadastroComprasComponent implements OnInit {
     valorTotal: number;
     visualizar: boolean;
     status: string;
+    active?: any;
   }[] = [];
   public listagemProdutosCompra: any = [];
   public listagemPagamentosCompra: any = [];
   public formCadastro: any = {};
   public formExclusao: any = {};
+  public abas = [{ nome: 'Produtos' }, { nome: 'Pagamentos' }];
   constructor() {}
 
   ngOnInit(): void {
@@ -57,14 +59,28 @@ export class CadastroComprasComponent implements OnInit {
       idCompra: compra.idCompra,
       idProduto: 1,
       descricaoProduto: 'Fios amarelos 0.5mm 200mt',
-      qtd: 1,
+      qtd: 2,
       valorUnitario: 100.25,
       valorTotal: 200,
+    });
+  }
+  async buscarComprasPagamentos(compra) {
+    this.listagemPagamentosCompra = [];
+    this.listagemPagamentosCompra.push({
+      idCompra: compra.idCompra,
+      idPagamento: 1,
+      idTipoPagamento: 'PIX',
+      seqPagamento: 1,
+      dataPagamento: '18/02/2023',
+      valorPagamento: 200.5,
+      status: 'Pago',
+      observacao: '',
     });
   }
   async mostrarProdutosCompra(compra) {
     compra.visualizar = !compra.visualizar;
     await this.buscarComprasProdutos(compra);
+    await this.buscarComprasPagamentos(compra);
   }
   async mostrarModalExclusao(param) {
     this.formExclusao = param;

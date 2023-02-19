@@ -13,12 +13,21 @@ export class CadastroComprasComponent implements OnInit {
   @Input() public modalExcConfig: ModalExclusaoConfig = {
     modalTitle: 'Atenção',
   };
-
   @Input() public modalCadConfig: ModalCadastroConfig = {
-    modalTitle: 'Cadastro de usuários',
+    modalTitle: 'Cadastro de compra',
+  };
+  @Input() public modalCadPgtoConfig: ModalCadastroConfig = {
+    modalTitle: 'Pagamentos',
+  };
+  @Input() public modalCadProdutosConfig: ModalCadastroConfig = {
+    modalTitle: 'Produtos',
   };
   @ViewChild('modalExclusao') public modalExclusao: ModalExclusaoComponent;
   @ViewChild('modalCadastro') private modalCadastro: ModalCadastroComponent;
+  @ViewChild('modalCadastroPgto')
+  private modalCadastroPgto: ModalCadastroComponent;
+  @ViewChild('modalCadastroProduto')
+  private modalCadastroProduto: ModalCadastroComponent;
 
   public listagemCompras: {
     idCompra: number;
@@ -97,6 +106,16 @@ export class CadastroComprasComponent implements OnInit {
   async mostrarModalEdicao(registro) {
     this.formCadastro = registro;
     this.formCadastro.tipoInclusao = 'E';
+    await this.buscarComprasProdutos(registro);
+    await this.buscarComprasPagamentos(registro);
     return await this.modalCadastro.open();
   }
+
+  async inserirProdutoCompra() {
+    return await this.modalCadastroProduto.open();
+  }
+  async inserirPagamentoCompra() {
+    return await this.modalCadastroPgto.open();
+  }
+  async salvarCompra() {}
 }

@@ -1,11 +1,5 @@
 <header-padrao></header-padrao>
 
-<!--<div class="progress">
-    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75"
-        aria-valuemin="0" aria-valuemax="100" [style.width]="progressBar+'%'">
-    </div>
-</div>-->
-
 <div class="body top-padrao" *ngIf="carregando">
     <carregar></carregar>
 </div>
@@ -39,6 +33,7 @@
             </tbody>
         </table>
     </div>
+    <paginacao></paginacao>
 </div>
 
 <modal-cadastro #modalCadastro [modalConfig]="modalCadConfig" [bodyTemplate]="modalCadastroBody"
@@ -47,12 +42,12 @@
 <ng-template #modalCadastroBody>
     <div class="row">
         <div class="col-xl-4">
-            <input-padrao label="Id Equipe" type="number" [(model)]="formCadastro.idEquipe" [disabled]="true">
-            </input-padrao>
+            <label>Id Equipe</label>
+            <input class="form-control" type="number" [(ngModel)]="formCadastro.idEquipe" [disabled]="true">
         </div>
         <div class="col-xl-8">
-            <input-padrao label="Nome da equipe" type="text" [(model)]="formCadastro.nome" maxlength="30">
-            </input-padrao>
+            <label>Nome da equipe</label>
+            <input class="form-control" type="text" [(ngModel)]="formCadastro.nome" maxlength="30">
         </div>
     </div>
 </ng-template>

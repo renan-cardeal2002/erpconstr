@@ -12,10 +12,10 @@ import { RequisicaoService } from 'src/app/services/requisicao.service';
   styleUrls: ['./cadastro-equipe.component.scss'],
 })
 export class CadastroEquipeComponent extends BasicModulos implements OnInit {
-  @Input() public modalExcConfig: ModalExclusaoConfig = {
+  public modalExcConfig: ModalExclusaoConfig = {
     modalTitle: 'Atenção',
   };
-  @Input() public modalCadConfig: ModalCadastroConfig = {
+  public modalCadConfig: ModalCadastroConfig = {
     modalTitle: 'Cadastro de equipe',
   };
   @ViewChild('modalExclusao') public modalExclusao: ModalExclusaoComponent;
@@ -24,6 +24,7 @@ export class CadastroEquipeComponent extends BasicModulos implements OnInit {
   public listagemEquipes: { idEquipe: number; nome: string }[] = [];
   public formCadastro: any = {};
   public formExclusao: any = {};
+  public msgExclusao = false;
 
   constructor(private requisicao: RequisicaoService) {
     super();
@@ -53,6 +54,7 @@ export class CadastroEquipeComponent extends BasicModulos implements OnInit {
       nome: registro.nome,
       tipoInclusao: registro.tipoInclusao,
     };
+    console.log(registro);
     this.requisicao.post(rota, param).subscribe(
       async (retorno: any) => {
         await this.buscarEquipes();
@@ -67,6 +69,7 @@ export class CadastroEquipeComponent extends BasicModulos implements OnInit {
       async (retorno: any) => {
         await this.buscarEquipes();
         this.fecharModal(modal);
+        this.msgExclusao = true;
       },
       (retorno: any) => {}
     );

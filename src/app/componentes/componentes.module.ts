@@ -19,6 +19,10 @@ import { BotaoCancelarComponent } from './botoes/botao-cancelar/botao-cancelar.c
 import { BotaoVisualizarComponent } from './botoes/botao-visualizar/botao-visualizar.component';
 import { InputPadraoComponent } from './inputs/input-padrao/input-padrao.component';
 import { CarregarComponent } from './carregar/carregar.component';
+import { PaginacaoComponent } from './paginacao/paginacao.component';
+import { AlertaComponent } from './alerta/alerta.component';
+import { NotificacaoComponent } from './notificacao/notificacao.component';
+import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +43,10 @@ import { CarregarComponent } from './carregar/carregar.component';
     BotaoVisualizarComponent,
     InputPadraoComponent,
     CarregarComponent,
+    PaginacaoComponent,
+    AlertaComponent,
+    NotificacaoComponent,
+    ProgressBarComponent,
   ],
   imports: [CommonModule, FormsModule, NgbModule],
   exports: [
@@ -59,6 +67,10 @@ import { CarregarComponent } from './carregar/carregar.component';
     BotaoVisualizarComponent,
     InputPadraoComponent,
     CarregarComponent,
+    PaginacaoComponent,
+    AlertaComponent,
+    NotificacaoComponent,
+    ProgressBarComponent,
   ],
 })
 export class ComponentesModule {}

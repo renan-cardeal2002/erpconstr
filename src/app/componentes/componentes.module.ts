@@ -17,6 +17,8 @@ import { BotaoCloseComponent } from './botoes/botao-close/botao-close.component'
 import { BotaoConfirmarComponent } from './botoes/botao-confirmar/botao-confirmar.component';
 import { BotaoCancelarComponent } from './botoes/botao-cancelar/botao-cancelar.component';
 import { BotaoVisualizarComponent } from './botoes/botao-visualizar/botao-visualizar.component';
+import { InputPadraoComponent } from './inputs/input-padrao/input-padrao.component';
+import { CarregarComponent } from './carregar/carregar.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { BotaoVisualizarComponent } from './botoes/botao-visualizar/botao-visual
     BotaoConfirmarComponent,
     BotaoCancelarComponent,
     BotaoVisualizarComponent,
+    InputPadraoComponent,
+    CarregarComponent,
   ],
   imports: [CommonModule, FormsModule, NgbModule],
   exports: [
@@ -53,6 +57,8 @@ import { BotaoVisualizarComponent } from './botoes/botao-visualizar/botao-visual
     BotaoConfirmarComponent,
     BotaoCancelarComponent,
     BotaoVisualizarComponent,
+    InputPadraoComponent,
+    CarregarComponent,
   ],
 })
 export class ComponentesModule {}

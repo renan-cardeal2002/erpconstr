@@ -4,6 +4,7 @@ import { ModalCadastroComponent } from 'src/app/componentes/modais/modal-cadastr
 import { ModalCadastroConfig } from 'src/app/componentes/modais/modal-cadastro/modal-cadastro.config';
 import { ModalExclusaoComponent } from 'src/app/componentes/modais/modal-exclusao/modal-exclusao.component';
 import { ModalExclusaoConfig } from 'src/app/componentes/modais/modal-exclusao/modal-exclusao.config';
+import { RequisicaoService } from 'src/app/services/requisicao.service';
 @Component({
   selector: 'app-cadastro-usuario',
   templateUrl: './cadastro-usuario.component.html',
@@ -23,7 +24,7 @@ export class CadastroUsuarioComponent extends BasicModulos implements OnInit {
   public formCadastro: any = {};
   public formExclusao: any = {};
   public listagemUsuarios: any = [];
-  constructor() {
+  constructor(private requisicao: RequisicaoService) {
     super();
   }
 
@@ -32,10 +33,13 @@ export class CadastroUsuarioComponent extends BasicModulos implements OnInit {
   }
 
   async buscarPessoas() {
-    this.carregando = true;
-    this.listagemUsuarios.push({ idUsuario: 1, login: 'Renan', senha: '123' });
-    console.log('buscou');
-    this.carregando = false;
+    let rota = '/cog/buscarUsuarios';
+    this.requisicao.get(rota).subscribe(
+      async (retorno: any) => {
+        this.listagemUsuarios = retorno;
+      },
+      (retorno: any) => {}
+    );
   }
 
   async mostrarModalExclusao(param) {

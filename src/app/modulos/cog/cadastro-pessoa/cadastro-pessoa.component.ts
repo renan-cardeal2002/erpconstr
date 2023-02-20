@@ -6,6 +6,7 @@ import { ModalExclusaoComponent } from 'src/app/componentes/modais/modal-exclusa
 import { ModalExclusaoConfig } from 'src/app/componentes/modais/modal-exclusao/modal-exclusao.config';
 import { ModalMensagemComponent } from 'src/app/componentes/modais/modal-mensagem/modal-mensagem.component';
 import { ModalMensagemConfig } from 'src/app/componentes/modais/modal-mensagem/modal-mensagem.config';
+import { RequisicaoService } from 'src/app/services/requisicao.service';
 
 @Component({
   selector: 'app-cadastro-pessoa',
@@ -16,13 +17,11 @@ export class CadastroPessoaComponent extends BasicModulos implements OnInit {
   @Input() public modalExcConfig: ModalExclusaoConfig = {
     modalTitle: 'Atenção',
   };
-
   @Input() public modalMsgConfig: ModalMensagemConfig = {
     modalTitle: 'Atenção',
     dismissButtonLabel: '',
     closeButtonLabel: 'OK',
   };
-
   @Input() public modalCadConfig: ModalCadastroConfig = {
     modalTitle: 'Cadastro de pessoas',
   };
@@ -40,8 +39,9 @@ export class CadastroPessoaComponent extends BasicModulos implements OnInit {
     tipoPessoa: string;
     situacao: string;
   }[] = [];
+  public listagemEquipes: any = [];
 
-  constructor() {
+  constructor(private requisicao: RequisicaoService) {
     super();
   }
   async ngOnInit(): Promise<void> {
@@ -73,6 +73,15 @@ export class CadastroPessoaComponent extends BasicModulos implements OnInit {
     });
     this.carregando = false;
   }
+  async buscarEquipes() {
+    let rota = '/cog/buscarEquipes';
+    this.requisicao.get(rota).subscribe(
+      async (retorno: any) => {
+        this.listagemEquipes = retorno;
+      },
+      (retorno: any) => {}
+    );
+  }
 
   async mostraModalMensagem(param) {
     this.mensagem = param;
@@ -85,11 +94,13 @@ export class CadastroPessoaComponent extends BasicModulos implements OnInit {
   async mostrarModalCadastro() {
     this.formCadastro = {};
     this.formCadastro.tipoInclusao = 'I';
+    this.buscarEquipes();
     return await this.modalCadastro.open();
   }
   async mostrarModalEdicao(registro) {
     this.formCadastro = registro;
     this.formCadastro.tipoInclusao = 'E';
+    this.buscarEquipes();
     return await this.modalCadastro.open();
   }
 }

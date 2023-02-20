@@ -1,15 +1,21 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { BasicModulos } from 'src/app/classes/basic-modulos';
 import { ModalCadastroComponent } from 'src/app/componentes/modais/modal-cadastro/modal-cadastro.component';
 import { ModalCadastroConfig } from 'src/app/componentes/modais/modal-cadastro/modal-cadastro.config';
 import { ModalExclusaoComponent } from 'src/app/componentes/modais/modal-exclusao/modal-exclusao.component';
 import { ModalExclusaoConfig } from 'src/app/componentes/modais/modal-exclusao/modal-exclusao.config';
+
+import { RequisicaoService } from 'src/app/services/requisicao.service';
 
 @Component({
   selector: 'app-cadastro-tipo-pagamento',
   templateUrl: './cadastro-tipo-pagamento.component.html',
   styleUrls: ['./cadastro-tipo-pagamento.component.scss'],
 })
-export class CadastroTipoPagamentoComponent implements OnInit {
+export class CadastroTipoPagamentoComponent
+  extends BasicModulos
+  implements OnInit
+{
   @Input() public modalExcConfig: ModalExclusaoConfig = {
     modalTitle: 'Atenção',
   };
@@ -27,28 +33,48 @@ export class CadastroTipoPagamentoComponent implements OnInit {
   public formCadastro: any = {};
   public formExclusao: any = {};
 
-  constructor() {}
+  constructor(private requisicao: RequisicaoService) {
+    super();
+  }
 
   ngOnInit(): void {
     this.buscarTiposPagamento();
   }
   async buscarTiposPagamento() {
-    this.listagemTiposPagamento.push({
-      idTipoPagamento: 'PIX',
-      tipoPagamento: 'PIX',
-    });
-    this.listagemTiposPagamento.push({
-      idTipoPagamento: 'TED',
-      tipoPagamento: 'Transferência bancária',
-    });
-    this.listagemTiposPagamento.push({
-      idTipoPagamento: 'CH',
-      tipoPagamento: 'CHEQUE',
-    });
-    this.listagemTiposPagamento.push({
-      idTipoPagamento: 'PIX',
-      tipoPagamento: 'PIX',
-    });
+    let rota = '/cog/buscarTiposPagamento';
+    this.requisicao.get(rota).subscribe(
+      async (retorno: any) => {
+        this.listagemTiposPagamento = retorno;
+      },
+      (retorno: any) => {}
+    );
+  }
+
+  async salvarTiposPagamento(registro, modal) {
+    let rota = '/cog/salvarTiposPagamento';
+    let param = {
+      idTipoPagamento: registro.idTipoPagamento,
+      tipoPagamento: registro.tipoPagamento,
+      tipoInclusao: registro.tipoInclusao,
+    };
+    this.requisicao.post(rota, param).subscribe(
+      async (retorno: any) => {
+        await this.buscarTiposPagamento();
+        this.fecharModal(modal);
+      },
+      (retorno: any) => {}
+    );
+  }
+  async excluirTiposPagamento(registro, modal) {
+    let rota =
+      '/cog/excluirTiposPagamento?idTipoPagamento=' + registro.idTipoPagamento;
+    this.requisicao.delete(rota).subscribe(
+      async (retorno: any) => {
+        await this.buscarTiposPagamento();
+        this.fecharModal(modal);
+      },
+      (retorno: any) => {}
+    );
   }
 
   async mostrarModalExclusao(param) {

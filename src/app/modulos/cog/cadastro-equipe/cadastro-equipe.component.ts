@@ -1,19 +1,20 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { BasicModulos } from 'src/app/classes/basic-modulos';
 import { ModalCadastroComponent } from 'src/app/componentes/modais/modal-cadastro/modal-cadastro.component';
 import { ModalCadastroConfig } from 'src/app/componentes/modais/modal-cadastro/modal-cadastro.config';
 import { ModalExclusaoComponent } from 'src/app/componentes/modais/modal-exclusao/modal-exclusao.component';
 import { ModalExclusaoConfig } from 'src/app/componentes/modais/modal-exclusao/modal-exclusao.config';
+import { RequisicaoService } from 'src/app/services/requisicao.service';
 
 @Component({
   selector: 'app-cadastro-equipe',
   templateUrl: './cadastro-equipe.component.html',
   styleUrls: ['./cadastro-equipe.component.scss'],
 })
-export class CadastroEquipeComponent implements OnInit {
+export class CadastroEquipeComponent extends BasicModulos implements OnInit {
   @Input() public modalExcConfig: ModalExclusaoConfig = {
     modalTitle: 'Atenção',
   };
-
   @Input() public modalCadConfig: ModalCadastroConfig = {
     modalTitle: 'Cadastro de equipe',
   };
@@ -24,15 +25,51 @@ export class CadastroEquipeComponent implements OnInit {
   public formCadastro: any = {};
   public formExclusao: any = {};
 
-  constructor() {}
+  constructor(private requisicao: RequisicaoService) {
+    super();
+  }
 
   ngOnInit(): void {
     this.buscarEquipes();
   }
+
   async buscarEquipes() {
-    this.listagemEquipes.push({ idEquipe: 1, nome: 'Equipe amarela' });
-    this.listagemEquipes.push({ idEquipe: 2, nome: 'Equipe verde' });
-    this.listagemEquipes.push({ idEquipe: 3, nome: 'Equipe azul' });
+    this.carregando = true;
+    let rota = '/cog/buscarEquipes';
+    this.requisicao.get(rota).subscribe(
+      async (retorno: any) => {
+        this.listagemEquipes = retorno;
+        console.log(retorno);
+        this.carregando = false;
+      },
+      (retorno: any) => {}
+    );
+  }
+
+  async salvarEquipe(registro, modal) {
+    let rota = '/cog/salvarEquipe';
+    let param = {
+      idEquipe: registro.idEquipe,
+      nome: registro.nome,
+      tipoInclusao: registro.tipoInclusao,
+    };
+    this.requisicao.post(rota, param).subscribe(
+      async (retorno: any) => {
+        await this.buscarEquipes();
+        this.fecharModal(modal);
+      },
+      (retorno: any) => {}
+    );
+  }
+  async excluirEquipe(registro, modal) {
+    let rota = '/cog/excluirEquipe?idEquipe=' + registro.idEquipe;
+    this.requisicao.delete(rota).subscribe(
+      async (retorno: any) => {
+        await this.buscarEquipes();
+        this.fecharModal(modal);
+      },
+      (retorno: any) => {}
+    );
   }
 
   async mostrarModalExclusao(param) {

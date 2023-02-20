@@ -1,5 +1,15 @@
 <header-padrao></header-padrao>
 
+<!--<div class="progress">
+    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75"
+        aria-valuemin="0" aria-valuemax="100" [style.width]="progressBar+'%'">
+    </div>
+</div>-->
+
+<div class="body top-padrao" *ngIf="carregando">
+    <carregar></carregar>
+</div>
+
 <div class="body top-padrao">
     <h4>Cadastro de equipe</h4>
     <div class="auto">
@@ -8,8 +18,8 @@
             <thead>
                 <tr theadPadrao>
                     <th>
-                        <botao-adicionar (buscaBotao)="mostrarModalCadastro()"
-                            toolTip="Incluir equipe"></botao-adicionar>
+                        <botao-adicionar (buscaBotao)="mostrarModalCadastro()" toolTip="Incluir equipe">
+                        </botao-adicionar>
                     </th>
                     <th>Id Equipe</th>
                     <th>Equipe</th>
@@ -31,20 +41,22 @@
     </div>
 </div>
 
-<modal-cadastro #modalCadastro [modalConfig]="modalCadConfig" [bodyTemplate]="modalCadastroBody">
+<modal-cadastro #modalCadastro [modalConfig]="modalCadConfig" [bodyTemplate]="modalCadastroBody"
+    (funcaoRecebida)="salvarEquipe(formCadastro, modalCadastro)">
 </modal-cadastro>
 <ng-template #modalCadastroBody>
     <div class="row">
         <div class="col-xl-4">
-            <label>Id Equipe</label>
-            <input class="form-control" type="number" [(ngModel)]="formCadastro.idEquipe" [disabled]="true">
+            <input-padrao label="Id Equipe" type="number" [(model)]="formCadastro.idEquipe" [disabled]="true">
+            </input-padrao>
         </div>
         <div class="col-xl-8">
-            <label>Nome da equipe</label>
-            <input class="form-control" type="text" [(ngModel)]="formCadastro.nome" maxlength="30">
+            <input-padrao label="Nome da equipe" type="text" [(model)]="formCadastro.nome" maxlength="30">
+            </input-padrao>
         </div>
     </div>
 </ng-template>
-<modal-exclusao #modalExclusao [modalConfig]="modalExcConfig">
+<modal-exclusao #modalExclusao [modalConfig]="modalExcConfig"
+    (funcaoRecebida)="excluirEquipe(formExclusao, modalExclusao)">
     Deseja realmente excluir o item selecionado?
 </modal-exclusao>

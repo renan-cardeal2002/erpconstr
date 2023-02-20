@@ -31,7 +31,8 @@
     </div>
 </div>
 
-<modal-cadastro #modalCadastro [modalConfig]="modalCadConfig" [bodyTemplate]="modalCadastroBody">
+<modal-cadastro #modalCadastro [modalConfig]="modalCadConfig" [bodyTemplate]="modalCadastroBody"
+    (funcaoRecebida)="salvarTiposPagamento(formCadastro, modalCadastro)">
 </modal-cadastro>
 <ng-template #modalCadastroBody>
     <div class="row">
@@ -46,6 +47,7 @@
         </div>
     </div>
 </ng-template>
-<modal-exclusao #modalExclusao [modalConfig]="modalExcConfig">
+<modal-exclusao #modalExclusao [modalConfig]="modalExcConfig"
+    (funcaoRecebida)="excluirTiposPagamento(formExclusao, modalExclusao)">
     Deseja realmente excluir o item selecionado?
 </modal-exclusao>

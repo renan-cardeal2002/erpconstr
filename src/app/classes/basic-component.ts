@@ -13,6 +13,9 @@ export abstract class BasicComponent {
   @Input() disabled: string;
   @Input() label: string = '';
   @Input() visualizar: boolean;
+  @Input() model: any;
+  @Input() type: string;
+  @Input() maxlength: string;
 
   funcao() {
     this.buscaBotao.emit();

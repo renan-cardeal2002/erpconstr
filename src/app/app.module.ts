@@ -8,6 +8,8 @@ import { FormsModule } from '@angular/forms';
 import { ComponentesModule } from './componentes/componentes.module';
 import { ModulosModule } from './modulos/modulos.module';
 
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -16,6 +18,7 @@ import { ModulosModule } from './modulos/modulos.module';
     FormsModule,
     ComponentesModule,
     ModulosModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

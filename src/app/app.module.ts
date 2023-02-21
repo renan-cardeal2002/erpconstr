@@ -10,6 +10,8 @@ import { ModulosModule } from './modulos/modulos.module';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
+import { NgbToastModule } from 'ngb-toast';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -19,6 +21,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     ComponentesModule,
     ModulosModule,
     HttpClientModule,
+    NgbToastModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

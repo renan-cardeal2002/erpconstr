@@ -42,19 +42,19 @@
 <ng-template #modalCadastroBody>
     <div class="row">
         <div class="col-xl-2">
-            <div class="form-floating mb-3">
+            <div class="form-floating">
                 <input class="form-control" type="number" [(ngModel)]="formCadastro.idPessoa" [disabled]="true">
                 <label>Id Pessoa</label>
             </div>
         </div>
         <div class="col-xl-5">
-            <div class="form-floating mb-3">
+            <div class="form-floating">
                 <input class="form-control" type="text" [(ngModel)]="formCadastro.nome" maxlength="30">
                 <label>Nome</label>
             </div>
         </div>
         <div class="col-xl-5">
-            <div class="form-floating mb-3">
+            <div class="form-floating">
                 <select class="form-control" [(ngModel)]="formCadastro.situacao">
                     <option value="A">Ativo</option>
                     <option value="I">Inativo</option>
@@ -65,7 +65,7 @@
     </div>
     <div class="row top-padrao">
         <div class="col-xl-6">
-            <div class="form-floating mb-3">
+            <div class="form-floating">
                 <select class="form-control" [(ngModel)]="formCadastro.tipoPessoa">
                     <option value="C">Cliente</option>
                     <option value="E">Engenheiro</option>
@@ -76,7 +76,7 @@
             </div>
         </div>
         <div class="col-xl-6">
-            <div class="form-floating mb-3">
+            <div class="form-floating">
                 <select class="form-control" [(ngModel)]="formCadastro.idEquipe">
                     <option *ngFor="let e of listagemEquipes" [value]="e.idEquipe">{{e.nome}}</option>
                 </select>

@@ -37,13 +37,17 @@
 <ng-template #modalCadastroBody>
     <div class="row">
         <div class="col-xl-4">
-            <label>Id Tipo Pagamento</label>
-            <input class="form-control" type="text" [(ngModel)]="formCadastro.idTipoPagamento" maxlength="3"
-                [disabled]="formCadastro.tipoInclusao == 'E'">
+            <div class="form-floating">
+                <input class="form-control" type="text" [(ngModel)]="formCadastro.idTipoPagamento" maxlength="3"
+                    [disabled]="formCadastro.tipoInclusao == 'E'">
+                <label>Id Tipo Pagamento</label>
+            </div>
         </div>
         <div class="col-xl-8">
-            <label>Tipo Pagamento</label>
-            <input class="form-control" type="text" [(ngModel)]="formCadastro.tipoPagamento" maxlength="20">
+            <div class="form-floating">
+                <input class="form-control" type="text" [(ngModel)]="formCadastro.tipoPagamento" maxlength="20">
+                <label>Tipo Pagamento</label>
+            </div>
         </div>
     </div>
 </ng-template>

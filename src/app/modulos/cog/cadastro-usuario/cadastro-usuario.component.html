@@ -8,8 +8,8 @@
             <thead>
                 <tr theadPadrao>
                     <th>
-                        <botao-adicionar (buscaBotao)="mostrarModalCadastro()"
-                            toolTip="Incluir usuário"></botao-adicionar>
+                        <botao-adicionar (buscaBotao)="mostrarModalCadastro()" toolTip="Incluir usuário">
+                        </botao-adicionar>
                     </th>
                     <th>Id Usuario</th>
                     <th>Login Usuario</th>
@@ -36,16 +36,22 @@
 <ng-template #modalCadastroBody>
     <div class="row">
         <div class="col-xl-2">
-            <label>Id Usuário</label>
-            <input class="form-control" type="number" [(ngModel)]="formCadastro.idUsuario" [disabled]="true">
+            <div class="form-floating">
+                <input class="form-control" type="number" [(ngModel)]="formCadastro.idUsuario" [disabled]="true">
+                <label>Id Usuário</label>
+            </div>
         </div>
         <div class="col-xl-5">
-            <label>Login Usuário</label>
-            <input class="form-control" type="text" [(ngModel)]="formCadastro.login" maxlength="15">
+            <div class="form-floating">
+                <input class="form-control" type="text" [(ngModel)]="formCadastro.login" maxlength="15">
+                <label>Login Usuário</label>
+            </div>
         </div>
         <div class="col-xl-5">
-            <label>Senha</label>
-            <input class="form-control" type="text" [(ngModel)]="formCadastro.senha" maxlength="15">
+            <div class="form-floating">
+                <input class="form-control" type="text" [(ngModel)]="formCadastro.senha" maxlength="15">
+                <label>Senha</label>
+            </div>
         </div>
     </div>
 </ng-template>

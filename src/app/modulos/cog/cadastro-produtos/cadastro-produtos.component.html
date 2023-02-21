@@ -34,12 +34,16 @@
 <ng-template #modalCadastroBody>
     <div class="row">
         <div class="col-xl-4">
-            <label>Id Produto</label>
-            <input class="form-control" type="number" [(ngModel)]="formCadastro.idProduto" [disabled]="true">
+            <div class="form-floating">
+                <input class="form-control" type="number" [(ngModel)]="formCadastro.idProduto" [disabled]="true">
+                <label>Id Produto</label>
+            </div>
         </div>
         <div class="col-xl-8">
-            <label>Descrição Produto</label>
-            <input class="form-control" type="text" [(ngModel)]="formCadastro.descricaoProduto" maxlength="30">
+            <div class="form-floating">
+                <input class="form-control" type="text" [(ngModel)]="formCadastro.descricaoProduto" maxlength="30">
+                <label>Descrição Produto</label>
+            </div>
         </div>
     </div>
 </ng-template>

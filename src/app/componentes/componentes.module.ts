@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { TabsComponent } from './tabs/tabs.component';
 import { TablePadraoDirective } from '../directives/table-padrao.directive';
 import { TheadPadraoDirective } from '../directives/thead-padrao.directive';
 import { BotaoAdicionarComponent } from './botoes/botao-adicionar/botao-adicionar.component';
@@ -27,7 +26,6 @@ import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 @NgModule({
   declarations: [
     HeaderComponent,
-    TabsComponent,
     TablePadraoDirective,
     TheadPadraoDirective,
     BotaoAdicionarComponent,
@@ -51,7 +49,6 @@ import { ProgressBarComponent } from './progress-bar/progress-bar.component';
   imports: [CommonModule, FormsModule, NgbModule],
   exports: [
     HeaderComponent,
-    TabsComponent,
     TablePadraoDirective,
     TheadPadraoDirective,
     BotaoAdicionarComponent,

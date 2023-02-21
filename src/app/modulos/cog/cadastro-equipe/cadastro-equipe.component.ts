@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BasicModulos } from 'src/app/classes/basic-modulos';
 import { ModalCadastroComponent } from 'src/app/componentes/modais/modal-cadastro/modal-cadastro.component';
 import { ModalCadastroConfig } from 'src/app/componentes/modais/modal-cadastro/modal-cadastro.config';
@@ -25,6 +25,8 @@ export class CadastroEquipeComponent extends BasicModulos implements OnInit {
   public formCadastro: any = {};
   public formExclusao: any = {};
   public msgExclusao = false;
+  public paginaEquipe = 1;
+  public itensPaginaEquipe = 10;
 
   constructor(private requisicao: RequisicaoService) {
     super();

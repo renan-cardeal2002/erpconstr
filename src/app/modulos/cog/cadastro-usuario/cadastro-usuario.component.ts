@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BasicModulos } from 'src/app/classes/basic-modulos';
 import { ModalCadastroComponent } from 'src/app/componentes/modais/modal-cadastro/modal-cadastro.component';
 import { ModalCadastroConfig } from 'src/app/componentes/modais/modal-cadastro/modal-cadastro.config';
@@ -11,11 +11,11 @@ import { RequisicaoService } from 'src/app/services/requisicao.service';
   styleUrls: ['./cadastro-usuario.component.scss'],
 })
 export class CadastroUsuarioComponent extends BasicModulos implements OnInit {
-  @Input() public modalExcConfig: ModalExclusaoConfig = {
+  public modalExcConfig: ModalExclusaoConfig = {
     modalTitle: 'Atenção',
   };
 
-  @Input() public modalCadConfig: ModalCadastroConfig = {
+  public modalCadConfig: ModalCadastroConfig = {
     modalTitle: 'Cadastro de usuários',
   };
   @ViewChild('modalExclusao') public modalExclusao: ModalExclusaoComponent;

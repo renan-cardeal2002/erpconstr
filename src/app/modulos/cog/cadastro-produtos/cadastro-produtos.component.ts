@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ModalCadastroComponent } from 'src/app/componentes/modais/modal-cadastro/modal-cadastro.component';
 import { ModalCadastroConfig } from 'src/app/componentes/modais/modal-cadastro/modal-cadastro.config';
 import { ModalExclusaoComponent } from 'src/app/componentes/modais/modal-exclusao/modal-exclusao.component';
@@ -10,11 +10,10 @@ import { ModalExclusaoConfig } from 'src/app/componentes/modais/modal-exclusao/m
   styleUrls: ['./cadastro-produtos.component.scss'],
 })
 export class CadastroProdutosComponent implements OnInit {
-  @Input() public modalExcConfig: ModalExclusaoConfig = {
+  public modalExcConfig: ModalExclusaoConfig = {
     modalTitle: 'Atenção',
   };
-
-  @Input() public modalCadConfig: ModalCadastroConfig = {
+  public modalCadConfig: ModalCadastroConfig = {
     modalTitle: 'Cadastro de usuários',
   };
   @ViewChild('modalExclusao') public modalExclusao: ModalExclusaoComponent;

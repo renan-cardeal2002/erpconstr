@@ -1,4 +1,17 @@
 <header-padrao></header-padrao>
+<!--<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions"
+    aria-controls="offcanvasWithBothOptions">Enable both scrolling & backdrop</button>
+
+<div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
+    aria-labelledby="offcanvasWithBothOptionsLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Backdrop with scrolling</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <p>Try scrolling the rest of the page to see this option in action.</p>
+    </div>
+</div>-->
 
 <div class="body top-padrao" *ngIf="carregando">
     <carregar></carregar>
@@ -20,7 +33,8 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let e of listagemEquipes">
+                <tr
+                    *ngFor="let e of listagemEquipes.slice(((paginaEquipe-1)*itensPaginaEquipe), ((paginaEquipe)*itensPaginaEquipe))">
                     <td>
                         <botao-editar (buscaBotao)="mostrarModalEdicao(e)" toolTip="Editar equipe">
                         </botao-editar>
@@ -33,7 +47,7 @@
             </tbody>
         </table>
     </div>
-    <paginacao></paginacao>
+    <paginacao [pagina]="paginaEquipe" [itensPagina]="itensPaginaEquipe"></paginacao>
 </div>
 
 <modal-cadastro #modalCadastro [modalConfig]="modalCadConfig" [bodyTemplate]="modalCadastroBody"
@@ -42,12 +56,16 @@
 <ng-template #modalCadastroBody>
     <div class="row">
         <div class="col-xl-4">
-            <label>Id Equipe</label>
-            <input class="form-control" type="number" [(ngModel)]="formCadastro.idEquipe" [disabled]="true">
+            <div class="form-floating mb-3">
+                <input class="form-control" type="number" [(ngModel)]="formCadastro.idEquipe" [disabled]="true">
+                <label>Id Equipe</label>
+            </div>
         </div>
         <div class="col-xl-8">
-            <label>Nome da equipe</label>
-            <input class="form-control" type="text" [(ngModel)]="formCadastro.nome" maxlength="30">
+            <div class="form-floating mb-3">
+                <input class="form-control" type="text" [(ngModel)]="formCadastro.nome" maxlength="30">
+                <label>Nome da equipe</label>
+            </div>
         </div>
     </div>
 </ng-template>

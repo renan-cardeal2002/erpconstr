@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'paginacao',
@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./paginacao.component.scss'],
 })
 export class PaginacaoComponent implements OnInit {
+  @Input() pagina: number;
+  @Input() itensPagina: number;
+
   constructor() {}
 
   ngOnInit(): void {}

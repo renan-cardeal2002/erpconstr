@@ -1,10 +1,27 @@
 <header-padrao></header-padrao>
 
+<div class="body top-padrao" *ngIf="carregando">
+    <carregar></carregar>
+</div>
+
 <div class="body top-padrao">
     <h4>Cadastro de usuários</h4>
     <div class="auto">
         <table tablePadrao>
-            <caption>Listagem de Usuários</caption>
+            <caption>
+                <button class="btn btn-sm" (click)="buscarUsuarios()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        *ngIf="!carregando" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z" />
+                        <path
+                            d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z" />
+                    </svg>
+                    <div class="spinner-border spinner-border-sm" *ngIf="carregando" role="status">
+                        <span class="sr-only"></span>
+                    </div>
+                </button>
+                Listagem de Usuários
+            </caption>
             <thead>
                 <tr theadPadrao>
                     <th>
@@ -51,6 +68,34 @@
             <div class="form-floating">
                 <input class="form-control" type="text" [(ngModel)]="formCadastro.senha" maxlength="15">
                 <label>Senha</label>
+            </div>
+        </div>
+    </div>
+    <div class="row top-padrao" *ngIf="formCadastro.tipoInclusao=='E'">
+        <div class=" col-xl-12">
+            <label>Vincular Empresas</label>
+            <div class="auto">
+                <table tablePadrao>
+                    <thead>
+                        <tr theadPadrao>
+                            <th>
+                                <botao-adicionar toolTip="Incluir compra">
+                                </botao-adicionar>
+                            </th>
+                            <th>Id Empresa</th>
+                            <th>Nome</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let v of listagemEmpresasUsuario">
+                            <td>
+                                <botao-excluir toolTip="Excluir vinculo"></botao-excluir>
+                            </td>
+                            <td>{{v.idEmpresa}}</td>
+                            <td>{{v.nome}}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

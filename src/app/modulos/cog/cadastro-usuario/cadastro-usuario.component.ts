@@ -24,6 +24,7 @@ export class CadastroUsuarioComponent extends BasicModulos implements OnInit {
   public formCadastro: any = {};
   public formExclusao: any = {};
   public listagemUsuarios: any = [];
+  public listagemEmpresasUsuario: any = [];
 
   constructor(
     private requisicao: RequisicaoService,
@@ -33,14 +34,26 @@ export class CadastroUsuarioComponent extends BasicModulos implements OnInit {
   }
 
   ngOnInit(): void {
-    this.buscarPessoas();
+    this.buscarUsuarios();
   }
 
-  async buscarPessoas() {
+  async buscarUsuarios() {
+    this.carregando = true;
     let rota = '/cog/buscarUsuarios';
     this.requisicao.get(rota).subscribe(
       async (retorno: any) => {
         this.listagemUsuarios = retorno;
+        this.carregando = false;
+      },
+      (retorno: any) => {}
+    );
+  }
+
+  async buscarEmpresasUsuario(usuario) {
+    let rota = '/cog/buscarEmpresasUsuario?idUsuario=' + usuario.idUsuario;
+    this.requisicao.get(rota).subscribe(
+      async (retorno: any) => {
+        this.listagemEmpresasUsuario = retorno;
       },
       (retorno: any) => {}
     );
@@ -51,13 +64,16 @@ export class CadastroUsuarioComponent extends BasicModulos implements OnInit {
     return await this.modalExclusao.open();
   }
   async mostrarModalCadastro() {
+    this.listagemEmpresasUsuario = [];
     this.formCadastro = {};
     this.formCadastro.tipoInclusao = 'I';
     return await this.modalCadastro.open();
   }
   async mostrarModalEdicao(registro) {
+    this.listagemEmpresasUsuario = [];
     this.formCadastro = registro;
     this.formCadastro.tipoInclusao = 'E';
+    this.buscarEmpresasUsuario(registro);
     return await this.modalCadastro.open();
   }
 }

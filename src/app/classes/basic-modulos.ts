@@ -6,7 +6,9 @@ import { NgbModalOptions, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 })
 export abstract class BasicModulos {
   @Output() buscaBotao: EventEmitter<any> = new EventEmitter();
-  @Input() codEmpresaInicial: any = 1;
+  @Input() idEmpresaSelecionada: any = window.localStorage.getItem('idEmpresa');
+  @Input() idUsuarioLogado: any = window.localStorage.getItem('idUsuario');
+
   public modalRef: NgbModalRef;
   public carregando: boolean = false;
 

@@ -9,6 +9,7 @@ import { RequisicaoService } from 'src/app/services/requisicao.service';
 })
 export class LoginComponent implements OnInit {
   public login: any = { usuario: '', senha: '' };
+  public empresasUsuario = [];
   constructor(private router: Router, private requisicao: RequisicaoService) {}
 
   ngOnInit(): void {}
@@ -18,12 +19,22 @@ export class LoginComponent implements OnInit {
 
     this.requisicao.get(rota).subscribe(
       async (retorno: any) => {
-        console.log(retorno);
-        if (retorno.temUser > 0) {
+        if (retorno.dadosLogin.temUser > 0) {
+          window.localStorage.setItem(
+            'idUsuario',
+            retorno.dadosLogin.idUsuario
+          );
+
+          this.empresasUsuario = retorno.empresas;
+          this.selecionarEmpresa(retorno.empresas[0]);
+
           this.router.navigate(['/home']);
         }
       },
       (retorno: any) => {}
     );
+  }
+  async selecionarEmpresa(empresa) {
+    window.localStorage.setItem('idEmpresa', empresa.idEmpresa);
   }
 }

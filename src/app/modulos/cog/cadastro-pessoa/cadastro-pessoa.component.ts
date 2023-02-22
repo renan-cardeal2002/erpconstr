@@ -34,7 +34,7 @@ export class CadastroPessoaComponent extends BasicModulos implements OnInit {
   public formCadastro: any;
   public listagemPessoas: {
     idPessoa: number;
-    idEquipe: number;
+    cnpjCpf: number;
     nome: string;
     tipoPessoa: string;
     situacao: string;
@@ -50,28 +50,14 @@ export class CadastroPessoaComponent extends BasicModulos implements OnInit {
 
   async buscarPessoas() {
     this.carregando = true;
-    this.listagemPessoas.push({
-      idPessoa: 1,
-      idEquipe: 1,
-      nome: 'Renan',
-      tipoPessoa: 'E',
-      situacao: 'A',
-    });
-    this.listagemPessoas.push({
-      idPessoa: 2,
-      idEquipe: 1,
-      nome: 'João',
-      tipoPessoa: 'O',
-      situacao: 'A',
-    });
-    this.listagemPessoas.push({
-      idPessoa: 3,
-      idEquipe: 1,
-      nome: 'Luiz',
-      tipoPessoa: 'O',
-      situacao: 'A',
-    });
-    this.carregando = false;
+    let rota = '/cog/buscarPessoas';
+    this.requisicao.get(rota).subscribe(
+      async (retorno: any) => {
+        this.listagemPessoas = retorno;
+        this.carregando = false;
+      },
+      (retorno: any) => {}
+    );
   }
   async buscarEquipes() {
     let rota = '/cog/buscarEquipes';
@@ -94,6 +80,8 @@ export class CadastroPessoaComponent extends BasicModulos implements OnInit {
   async mostrarModalCadastro() {
     this.formCadastro = {};
     this.formCadastro.tipoInclusao = 'I';
+    this.formCadastro.situacao = 'A';
+    this.formCadastro.tipoPessoa = 'J';
     this.buscarEquipes();
     return await this.modalCadastro.open();
   }

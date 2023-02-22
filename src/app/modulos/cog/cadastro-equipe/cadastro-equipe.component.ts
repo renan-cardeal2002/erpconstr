@@ -38,7 +38,7 @@ export class CadastroEquipeComponent extends BasicModulos implements OnInit {
 
   async buscarEquipes() {
     this.carregando = true;
-    let rota = '/cog/buscarEquipes';
+    let rota = '/cog/buscarEquipes?idEmpresa=' + this.idEmpresaSelecionada;
     this.requisicao.get(rota).subscribe(
       async (retorno: any) => {
         this.listagemEquipes = retorno;
@@ -55,8 +55,9 @@ export class CadastroEquipeComponent extends BasicModulos implements OnInit {
       idEquipe: registro.idEquipe,
       nome: registro.nome,
       tipoInclusao: registro.tipoInclusao,
+      idEmpresa: this.idEmpresaSelecionada,
     };
-    console.log(registro);
+
     this.requisicao.post(rota, param).subscribe(
       async (retorno: any) => {
         await this.buscarEquipes();
@@ -66,7 +67,12 @@ export class CadastroEquipeComponent extends BasicModulos implements OnInit {
     );
   }
   async excluirEquipe(registro, modal) {
-    let rota = '/cog/excluirEquipe?idEquipe=' + registro.idEquipe;
+    let rota =
+      '/cog/excluirEquipe?idEquipe=' +
+      registro.idEquipe +
+      '&idEmpresa=' +
+      this.idEmpresaSelecionada;
+
     this.requisicao.delete(rota).subscribe(
       async (retorno: any) => {
         await this.buscarEquipes();

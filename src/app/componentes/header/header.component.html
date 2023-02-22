@@ -18,41 +18,34 @@
         </button>-->
     </div>
 </nav>
-<div class="collapse" id="navbarToggleExternalContent">
-    <div class="bg-dark p-4">
-        <div class="text-white h4">
-            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor"
-                class="bi bi-person-circle" viewBox="0 0 16 16">
-                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                <path fill-rule="evenodd"
-                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
-            </svg>
-            Renan C
-        </div>
-        <h5 class="text-white h4" style="cursor: pointer;" (click)="navegar('/home')">Menu</h5>
-        <span class="text-muted" style="cursor: pointer;" (click)="navegar('/perfil')">Perfil</span><br>
-        <span class="text-muted"><a href="">Sair</a></span><br>
-    </div>
-</div>
 
 <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
     aria-labelledby="offcanvasWithBothOptionsLabel">
     <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Configurações</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
-        <div class="h4">
-            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="black" class="bi bi-person-circle"
+        <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="black" class="bi bi-person-circle"
                 viewBox="0 0 16 16">
                 <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
                 <path fill-rule="evenodd"
                     d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
             </svg>
-            Renan C
+            {{loginUsuarioLogado}}
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="form-floating">
+            <select class="form-control">
+                <option [value]="e.idEmpresa" *ngFor="let e of listagemEmpresasUsuario">{{e.nome}}</option>
+            </select>
+            <label>Empresa</label>
         </div>
-        <h5 class="h4" style="cursor: pointer;" (click)="navegar('/home')">Menu</h5>
+        <div style="cursor: pointer;" class="h4" (click)="navegar('/home')">
+            Menu
+        </div>
         <span style="cursor: pointer;" (click)="navegar('/perfil')">Perfil</span><br>
-        <span><a href="">Sair</a></span><br>
+        <span class="text-muted">
+            <a href="" style="color: red;">Sair</a>
+        </span>
     </div>
 </div>

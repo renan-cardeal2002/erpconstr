@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
             'idUsuario',
             retorno.dadosLogin.idUsuario
           );
+          window.localStorage.setItem('usuario', retorno.dadosLogin.login);
 
           this.empresasUsuario = retorno.empresas;
           this.selecionarEmpresa(retorno.empresas[0]);

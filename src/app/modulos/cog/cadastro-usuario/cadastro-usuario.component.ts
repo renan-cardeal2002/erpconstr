@@ -23,8 +23,10 @@ export class CadastroUsuarioComponent extends BasicModulos implements OnInit {
 
   public formCadastro: any = {};
   public formExclusao: any = {};
+  public formIclusaoEmpresa: any = { idEmpresa: '' };
   public listagemUsuarios: any = [];
   public listagemEmpresasUsuario: any = [];
+  public listagemEmpresas: any = [];
 
   constructor(
     private requisicao: RequisicaoService,
@@ -57,8 +59,54 @@ export class CadastroUsuarioComponent extends BasicModulos implements OnInit {
       (retorno: any) => {}
     );
   }
-  async salvarUsuario() {}
-  async excluirUsuario() {}
+  async buscarEmpresas() {
+    let rota = '/cog/buscarEmpresas';
+    this.requisicao.get(rota).subscribe(
+      async (retorno: any) => {
+        this.listagemEmpresas = retorno;
+      },
+      (retorno: any) => {}
+    );
+  }
+  async salvarUsuario(registro, modal) {
+    let rota = '/cog/salvarUsuario';
+    let param = {
+      tipoInclusao: registro.tipoInclusao,
+      idUsuario: registro.idUsuario,
+      login: registro.login,
+      senha: registro.senha,
+    };
+    this.requisicao.post(rota, param).subscribe(
+      async (retorno: any) => {
+        await this.buscarUsuarios();
+        this.fecharModal(modal);
+      },
+      (retorno: any) => {}
+    );
+  }
+  async excluirUsuario(registro, modal) {
+    let rota = '/cog/excluirUsuario?idUsuario=' + registro.idUsuario;
+    this.requisicao.delete(rota).subscribe(
+      async (retorno: any) => {
+        await this.buscarUsuarios();
+        this.fecharModal(modal);
+      },
+      (retorno: any) => {}
+    );
+  }
+
+  async novoRegistro(usuario) {
+    this.buscarEmpresas();
+    this.listagemEmpresasUsuario.push({
+      idUsuario: usuario,
+      idEmpresa: '',
+      nome: '',
+      editando: true,
+    });
+  }
+  async cancelarRegistro(index) {
+    this.listagemEmpresasUsuario.splice(index);
+  }
 
   async salvarEmpresaUsuario() {}
   async excluirEmpresaUsuario() {}

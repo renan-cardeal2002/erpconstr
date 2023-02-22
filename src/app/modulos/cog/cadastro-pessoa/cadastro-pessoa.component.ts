@@ -69,8 +69,42 @@ export class CadastroPessoaComponent extends BasicModulos implements OnInit {
     );
   }
 
-  async salvarPessoa() {}
-  async excluirPessoa() {}
+  async salvarPessoa(registro, modal) {
+    let rota = '/cog/salvarPessoa';
+    let param = {
+      idEmpresa: this.idEmpresaSelecionada,
+      idPessoa: registro.idPessoa,
+      tipoInclusao: registro.tipoInclusao,
+      nome: registro.nome,
+      cnpjCpf: registro.cnpjCpf,
+      tipoPessoa: registro.tipoPessoa,
+      situacao: registro.situacao,
+      funcionario: registro.funcionario,
+      cliente: registro.cliente,
+      fornecedor: registro.fornecedor,
+      tipoFuncionario: registro.tipoFuncionario,
+      idEquipe: registro.idEquipe,
+    };
+
+    this.requisicao.post(rota, param).subscribe(
+      async (retorno: any) => {
+        await this.buscarPessoas();
+        this.fecharModal(modal);
+      },
+      (retorno: any) => {}
+    );
+  }
+  async excluirPessoa(registro, modal) {
+    let rota = '/cog/excluirPessoa?idPessoa=' + registro.idPessoa;
+
+    this.requisicao.delete(rota).subscribe(
+      async (retorno: any) => {
+        await this.buscarPessoas();
+        this.fecharModal(modal);
+      },
+      (retorno: any) => {}
+    );
+  }
 
   async mostraModalMensagem(param) {
     this.mensagem = param;

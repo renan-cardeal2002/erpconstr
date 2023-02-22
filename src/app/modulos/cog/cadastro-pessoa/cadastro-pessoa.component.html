@@ -54,7 +54,8 @@
     </div>
 </div>
 
-<modal-cadastro #modalCadastro [modalConfig]="modalCadConfig" [bodyTemplate]="modalCadastroBody">
+<modal-cadastro #modalCadastro [modalConfig]="modalCadConfig" [bodyTemplate]="modalCadastroBody"
+    (funcaoRecebida)="salvarPessoa(formCadastro, modalCadastro)">
 </modal-cadastro>
 <ng-template #modalCadastroBody>
     <div class="row">
@@ -167,7 +168,8 @@
         </div>
     </div>
 </ng-template>
-<modal-exclusao #modalExclusao [modalConfig]="modalExcConfig">
+<modal-exclusao #modalExclusao [modalConfig]="modalExcConfig"
+    (funcaoRecebida)="excluirPessoa(formExclusao, modalExclusao)">
     Deseja realmente excluir o item selecionado?
 </modal-exclusao>
 <modal-mensagem #modalMensagem [modalConfig]="modalMsgConfig" (funcaoRecebida)="fecharModal(modalMensagem)">

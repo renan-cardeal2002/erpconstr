@@ -48,7 +48,8 @@
     </div>
 </div>
 
-<modal-cadastro #modalCadastro [modalConfig]="modalCadConfig" [bodyTemplate]="modalCadastroBody">
+<modal-cadastro #modalCadastro [modalConfig]="modalCadConfig" [bodyTemplate]="modalCadastroBody"
+    (funcaoRecebida)="salvarUsuario(formCadastro, modalCadastro)">
 </modal-cadastro>
 <ng-template #modalCadastroBody>
     <div class="row">
@@ -79,7 +80,8 @@
                     <thead>
                         <tr theadPadrao>
                             <th>
-                                <botao-adicionar toolTip="Incluir compra">
+                                <botao-adicionar (click)="novoRegistro(formCadastro.idUsuario)"
+                                    toolTip="Incluir compra">
                                 </botao-adicionar>
                             </th>
                             <th>Id Empresa</th>
@@ -87,12 +89,23 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let v of listagemEmpresasUsuario">
-                            <td>
+                        <tr *ngFor="let v of listagemEmpresasUsuario; let i = index">
+                            <td *ngIf="!v.editando">
                                 <botao-excluir toolTip="Excluir vinculo"></botao-excluir>
                             </td>
-                            <td>{{v.idEmpresa}}</td>
-                            <td>{{v.nome}}</td>
+                            <td *ngIf="v.editando">
+                                <botao-excluir toolTip="Cancelar" (buscaBotao)="cancelarRegistro(i)"></botao-excluir>
+                                <botao-confirmar toolTip="Confirmar vinculo" [icon]="true"></botao-confirmar>
+                            </td>
+                            <td *ngIf="!v.editando">{{v.idEmpresa}}</td>
+                            <td *ngIf="!v.editando">{{v.nome}}</td>
+                            <td colspan="2" *ngIf="v.editando">
+                                <select class="form-control" [(ngModel)]="formIclusaoEmpresa.idEmpresa">
+                                    <option *ngFor="let e of listagemEmpresas" [value]="e.idEmpresa">
+                                        {{e.idEmpresa}} - {{e.nome}}
+                                    </option>
+                                </select>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -100,6 +113,7 @@
         </div>
     </div>
 </ng-template>
-<modal-exclusao #modalExclusao [modalConfig]="modalExcConfig">
+<modal-exclusao #modalExclusao [modalConfig]="modalExcConfig"
+    (funcaoRecebida)="excluirUsuario(formExclusao, modalExclusao)">
     Deseja realmente excluir o item selecionado?
 </modal-exclusao>

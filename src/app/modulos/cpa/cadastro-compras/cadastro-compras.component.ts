@@ -89,6 +89,19 @@ export class CadastroComprasComponent implements OnInit {
       observacao: '',
     });
   }
+  async salvarCompra() {}
+  async excluirCompra() {}
+
+  async salvarProdutoCompra() {
+    return await this.modalCadastroProduto.open();
+  }
+  async excluirProdutoCompra() {}
+
+  async salvarPagamentoCompra() {
+    return await this.modalCadastroPgto.open();
+  }
+  async excluirPagamentoCompra() {}
+
   async mostrarProdutosCompra(compra) {
     compra.visualizar = !compra.visualizar;
     await this.buscarComprasProdutos(compra);
@@ -110,12 +123,4 @@ export class CadastroComprasComponent implements OnInit {
     await this.buscarComprasPagamentos(registro);
     return await this.modalCadastro.open();
   }
-
-  async inserirProdutoCompra() {
-    return await this.modalCadastroProduto.open();
-  }
-  async inserirPagamentoCompra() {
-    return await this.modalCadastroPgto.open();
-  }
-  async salvarCompra() {}
 }

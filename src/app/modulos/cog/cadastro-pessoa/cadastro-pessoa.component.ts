@@ -69,6 +69,9 @@ export class CadastroPessoaComponent extends BasicModulos implements OnInit {
     );
   }
 
+  async salvarPessoa() {}
+  async excluirPessoa() {}
+
   async mostraModalMensagem(param) {
     this.mensagem = param;
     return await this.modalMensagem.open();

@@ -48,7 +48,6 @@ export class CadastroUsuarioComponent extends BasicModulos implements OnInit {
       (retorno: any) => {}
     );
   }
-
   async buscarEmpresasUsuario(usuario) {
     let rota = '/cog/buscarEmpresasUsuario?idUsuario=' + usuario.idUsuario;
     this.requisicao.get(rota).subscribe(
@@ -58,6 +57,11 @@ export class CadastroUsuarioComponent extends BasicModulos implements OnInit {
       (retorno: any) => {}
     );
   }
+  async salvarUsuario() {}
+  async excluirUsuario() {}
+
+  async salvarEmpresaUsuario() {}
+  async excluirEmpresaUsuario() {}
 
   async mostrarModalExclusao(param) {
     this.formExclusao = param;

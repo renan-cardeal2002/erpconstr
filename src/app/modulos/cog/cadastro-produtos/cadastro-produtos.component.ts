@@ -35,6 +35,8 @@ export class CadastroProdutosComponent implements OnInit {
       descricaoProduto: 'Fios amarelos 0.5mm 200mt',
     });
   }
+  async salvarProduto() {}
+  async excluirProduto() {}
 
   async mostrarModalExclusao(param) {
     this.formExclusao = param;

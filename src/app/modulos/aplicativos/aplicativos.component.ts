@@ -1,55 +1,43 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { BasicModulos } from 'src/app/classes/basic-modulos';
+import { RequisicaoService } from 'src/app/services/requisicao.service';
 
 @Component({
   selector: 'aplicativos',
   templateUrl: './aplicativos.component.html',
   styleUrls: ['./aplicativos.component.scss'],
 })
-export class AplicativosComponent implements OnInit {
-  public dragging = false;
+export class AplicativosComponent extends BasicModulos implements OnInit {
   public carregando = false;
 
   public sistemas = [
-    { codSistema: 'COG', nome: 'Controles Gerais' },
-    { codSistema: 'CPA', nome: 'Compras' },
+    { idSistema: 'COG', nome: 'Controles Gerais' },
+    { idSistema: 'CPA', nome: 'Compras' },
+    { idSistema: 'FNC', nome: 'Financeiro' },
   ];
   public aplicativos: any = [];
-  public aplicativosFavoritos = [
-    {
-      codSistema: 'COG',
-      codAplicativo: 'CADPESSOA',
-      nome: 'Cadastro de pessoas',
-    },
-    {
-      codSistema: 'COG',
-      codAplicativo: 'CADUSUARIO',
-      nome: 'Cadastro de usuario',
-    },
-    {
-      codSistema: 'COG',
-      codAplicativo: 'CADTIPOPAGAMENTO',
-      nome: 'Cadastro de tipo de pagamento',
-    },
-    {
-      codSistema: 'COG',
-      codAplicativo: 'CADEQUIPE',
-      nome: 'Cadastro de equipe',
-    },
-    {
-      codSistema: 'COG',
-      codAplicativo: 'CADPRODUTO',
-      nome: 'Cadastro de produtos',
-    },
-    {
-      codSistema: 'CPA',
-      codAplicativo: 'CADCOMPRAS',
-      nome: 'Cadastro de compras',
-    },
-  ];
-  constructor(private router: Router) {}
+  public aplicativosFavoritos = [];
 
-  ngOnInit(): void {}
+  constructor(private router: Router, private requisicao: RequisicaoService) {
+    super();
+  }
+
+  ngOnInit(): void {
+    this.buscarAplicacoesUsuario();
+  }
+
+  async buscarAplicacoesUsuario() {
+    let rota = '/cog/buscarAplicacoesUsuario?idUsuario=' + this.idUsuarioLogado;
+    this.requisicao.get(rota).subscribe(
+      async (retorno: any) => {
+        this.aplicativos = retorno;
+
+        console.log(retorno);
+      },
+      (retorno: any) => {}
+    );
+  }
   getColor(sistema: any): any {
     let colors = [
       '#899DB6',
@@ -68,46 +56,46 @@ export class AplicativosComponent implements OnInit {
       '#040404',
     ];
 
-    if (sistema.codSistema == 'COG') {
+    if (sistema.idSistema == 'COG') {
       return colors[0];
     }
-    if (sistema.codSistema == 'CPA') {
+    if (sistema.idSistema == 'CPA') {
       return colors[1];
     }
-    if (sistema.codSistema == 'EST') {
+    if (sistema.idSistema == 'EST') {
       return colors[2];
     }
-    if (sistema.codSistema == 'FNC') {
+    if (sistema.idSistema == 'FNC') {
       return colors[3];
     }
-    if (sistema.codSistema == 'FIS') {
+    if (sistema.idSistema == 'FIS') {
       return colors[4];
     }
-    if (sistema.codSistema == 'MKT') {
+    if (sistema.idSistema == 'MKT') {
       return colors[5];
     }
-    if (sistema.codSistema == 'PRO') {
+    if (sistema.idSistema == 'PRO') {
       return colors[6];
     }
-    if (sistema.codSistema == 'SAC') {
+    if (sistema.idSistema == 'SAC') {
       return colors[7];
     }
-    if (sistema.codSistema == 'SEG') {
+    if (sistema.idSistema == 'SEG') {
       return colors[8];
     }
-    if (sistema.codSistema == 'SRH') {
+    if (sistema.idSistema == 'SRH') {
       return colors[9];
     }
-    if (sistema.codSistema == 'TRP') {
+    if (sistema.idSistema == 'TRP') {
       return colors[10];
     }
-    if (sistema.codSistema == 'VDA') {
+    if (sistema.idSistema == 'VDA') {
       return colors[11];
     }
-    if (sistema.codSistema == 'WMS') {
+    if (sistema.idSistema == 'WMS') {
       return colors[12];
     }
-    if (sistema.codSistema == 'AJD') {
+    if (sistema.idSistema == 'AJD') {
       return colors[13];
     }
   }
@@ -115,7 +103,8 @@ export class AplicativosComponent implements OnInit {
     console.log(sistema);
   }
   selecionarAplicativo(aplicativo: any) {
-    this.router.navigate([`/${aplicativo.codAplicativo}`]);
+    console.log(aplicativo);
+    this.router.navigate([`/${aplicativo.idAplicacao}`]);
   }
   buscarSistemas() {}
 }

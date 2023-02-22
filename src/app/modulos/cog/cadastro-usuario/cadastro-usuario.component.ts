@@ -100,7 +100,6 @@ export class CadastroUsuarioComponent extends BasicModulos implements OnInit {
     this.listagemEmpresasUsuario.push({
       idUsuario: usuario,
       idEmpresa: '',
-      nome: '',
       editando: true,
     });
   }
@@ -108,8 +107,30 @@ export class CadastroUsuarioComponent extends BasicModulos implements OnInit {
     this.listagemEmpresasUsuario.splice(index);
   }
 
-  async salvarEmpresaUsuario() {}
-  async excluirEmpresaUsuario() {}
+  async salvarEmpresaUsuario(registro) {
+    let rota = '/cog/salvarEmpresaUsuario';
+    let param = {
+      idUsuario: registro.idUsuario,
+      idEmpresa: this.formIclusaoEmpresa.idEmpresa,
+    };
+    this.requisicao.post(rota, param).subscribe(
+      async (retorno: any) => {
+        await this.buscarEmpresasUsuario(registro);
+      },
+      (retorno: any) => {}
+    );
+  }
+  async excluirEmpresaUsuario(registro) {
+    let rota =
+      '/cog/excluirEmpresaUsuario?idUsuarioEmpresa=' +
+      registro.idUsuarioEmpresa;
+    this.requisicao.delete(rota).subscribe(
+      async (retorno: any) => {
+        await this.buscarEmpresasUsuario(registro);
+      },
+      (retorno: any) => {}
+    );
+  }
 
   async mostrarModalExclusao(param) {
     this.formExclusao = param;

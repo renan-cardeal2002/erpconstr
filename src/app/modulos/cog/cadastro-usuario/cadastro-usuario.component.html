@@ -91,16 +91,20 @@
                     <tbody>
                         <tr *ngFor="let v of listagemEmpresasUsuario; let i = index">
                             <td *ngIf="!v.editando">
-                                <botao-excluir toolTip="Excluir vinculo"></botao-excluir>
+                                <botao-excluir (buscaBotao)="excluirEmpresaUsuario(v)" toolTip="Excluir vinculo">
+                                </botao-excluir>
                             </td>
                             <td *ngIf="v.editando">
                                 <botao-excluir toolTip="Cancelar" (buscaBotao)="cancelarRegistro(i)"></botao-excluir>
-                                <botao-confirmar toolTip="Confirmar vinculo" [icon]="true"></botao-confirmar>
+                                <botao-confirmar (buscaBotao)="salvarEmpresaUsuario(v)" toolTip="Confirmar vinculo"
+                                    [icon]="true">
+                                </botao-confirmar>
                             </td>
                             <td *ngIf="!v.editando">{{v.idEmpresa}}</td>
                             <td *ngIf="!v.editando">{{v.nome}}</td>
                             <td colspan="2" *ngIf="v.editando">
                                 <select class="form-control" [(ngModel)]="formIclusaoEmpresa.idEmpresa">
+                                    <option value="">Selecione uma empresa</option>
                                     <option *ngFor="let e of listagemEmpresas" [value]="e.idEmpresa">
                                         {{e.idEmpresa}} - {{e.nome}}
                                     </option>

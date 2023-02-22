@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CadastroEmpresasComponent } from './modulos/cog/cadastro-empresas/cadastro-empresas.component';
 import { CadastroEquipeComponent } from './modulos/cog/cadastro-equipe/cadastro-equipe.component';
 import { CadastroPessoaComponent } from './modulos/cog/cadastro-pessoa/cadastro-pessoa.component';
 import { CadastroProdutosComponent } from './modulos/cog/cadastro-produtos/cadastro-produtos.component';
@@ -41,6 +42,10 @@ const routes: Routes = [
   {
     path: 'CADPRODUTO',
     component: CadastroProdutosComponent,
+  },
+  {
+    path: 'CADEMPRESA',
+    component: CadastroEmpresasComponent,
   },
 ];
 

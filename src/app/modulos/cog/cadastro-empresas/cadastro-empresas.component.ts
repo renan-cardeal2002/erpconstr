@@ -4,112 +4,77 @@ import { ModalCadastroComponent } from 'src/app/componentes/modais/modal-cadastr
 import { ModalCadastroConfig } from 'src/app/componentes/modais/modal-cadastro/modal-cadastro.config';
 import { ModalExclusaoComponent } from 'src/app/componentes/modais/modal-exclusao/modal-exclusao.component';
 import { ModalExclusaoConfig } from 'src/app/componentes/modais/modal-exclusao/modal-exclusao.config';
-import { ModalMensagemComponent } from 'src/app/componentes/modais/modal-mensagem/modal-mensagem.component';
-import { ModalMensagemConfig } from 'src/app/componentes/modais/modal-mensagem/modal-mensagem.config';
 import { RequisicaoService } from 'src/app/services/requisicao.service';
 
 @Component({
-  selector: 'app-cadastro-pessoa',
-  templateUrl: './cadastro-pessoa.component.html',
-  styleUrls: ['./cadastro-pessoa.component.scss'],
+  selector: 'app-cadastro-empresas',
+  templateUrl: './cadastro-empresas.component.html',
+  styleUrls: ['./cadastro-empresas.component.scss'],
 })
-export class CadastroPessoaComponent extends BasicModulos implements OnInit {
+export class CadastroEmpresasComponent extends BasicModulos implements OnInit {
   public modalExcConfig: ModalExclusaoConfig = {
     modalTitle: 'Atenção',
-  };
-  public modalMsgConfig: ModalMensagemConfig = {
-    modalTitle: 'Atenção',
-    dismissButtonLabel: '',
-    closeButtonLabel: 'OK',
   };
   public modalCadConfig: ModalCadastroConfig = {
     modalTitle: 'Cadastro de pessoas',
   };
   @ViewChild('modalExclusao') public modalExclusao: ModalExclusaoComponent;
-  @ViewChild('modalMensagem') private modalMensagem: ModalMensagemComponent;
   @ViewChild('modalCadastro') private modalCadastro: ModalCadastroComponent;
 
-  public mensagem: string;
   public formExclusao: any;
   public formCadastro: any;
-  public listagemPessoas: {
-    idPessoa: number;
-    cnpjCpf: number;
-    nome: string;
-    tipoPessoa: string;
-    situacao: string;
-  }[] = [];
-  public listagemEquipes: any = [];
+  public listagemEmpresas: any = [];
 
   constructor(private requisicao: RequisicaoService) {
     super();
   }
-  async ngOnInit(): Promise<void> {
-    await this.buscarPessoas();
+
+  ngOnInit(): void {
+    this.buscarEmpresas();
   }
 
-  async buscarPessoas() {
+  async buscarEmpresas() {
     this.carregando = true;
-    let rota = '/cog/buscarPessoas';
+    let rota = '/cog/buscarEmpresas';
     this.requisicao.get(rota).subscribe(
       async (retorno: any) => {
-        this.listagemPessoas = retorno;
+        this.listagemEmpresas = retorno;
         this.carregando = false;
       },
       (retorno: any) => {}
     );
   }
-  async buscarEquipes() {
-    let rota = '/cog/buscarEquipes';
-    this.requisicao.get(rota).subscribe(
-      async (retorno: any) => {
-        this.listagemEquipes = retorno;
-      },
-      (retorno: any) => {}
-    );
-  }
-
-  async salvarPessoa(registro, modal) {
-    let rota = '/cog/salvarPessoa';
+  async salvarEmpresa(registro, modal) {
+    let rota = '/cog/salvarEmpresa';
     let param = {
-      idEmpresa: this.idEmpresaSelecionada,
-      idPessoa: registro.idPessoa,
+      idEmpresa: registro.idEmpresa,
       tipoInclusao: registro.tipoInclusao,
       nome: registro.nome,
       cnpjCpf: registro.cnpjCpf,
       tipoPessoa: registro.tipoPessoa,
-      situacao: registro.situacao,
-      funcionario: registro.funcionario,
-      cliente: registro.cliente,
-      fornecedor: registro.fornecedor,
-      tipoFuncionario: registro.tipoFuncionario,
-      idEquipe: registro.idEquipe,
+      inscricaoEstadual: registro.inscricaoEstadual,
+      inscricaoMunicipal: registro.inscricaoMunicipal,
     };
 
     this.requisicao.post(rota, param).subscribe(
       async (retorno: any) => {
-        await this.buscarPessoas();
+        await this.buscarEmpresas();
         this.fecharModal(modal);
       },
       (retorno: any) => {}
     );
   }
-  async excluirPessoa(registro, modal) {
-    let rota = '/cog/excluirPessoa?idPessoa=' + registro.idPessoa;
-
+  async excluirEmpresa(registro, modal) {
+    let rota = '/cog/excluirEmpresa?idEmpresa=' + registro.idEmpresa;
     this.requisicao.delete(rota).subscribe(
       async (retorno: any) => {
-        await this.buscarPessoas();
+        await this.buscarEmpresas();
         this.fecharModal(modal);
       },
       (retorno: any) => {}
     );
   }
 
-  async mostraModalMensagem(param) {
-    this.mensagem = param;
-    return await this.modalMensagem.open();
-  }
   async mostrarModalExclusao(param) {
     this.formExclusao = param;
     return await this.modalExclusao.open();
@@ -119,13 +84,13 @@ export class CadastroPessoaComponent extends BasicModulos implements OnInit {
     this.formCadastro.tipoInclusao = 'I';
     this.formCadastro.situacao = 'A';
     this.formCadastro.tipoPessoa = 'J';
-    this.buscarEquipes();
+    this.buscarEmpresas();
     return await this.modalCadastro.open();
   }
   async mostrarModalEdicao(registro) {
     this.formCadastro = registro;
     this.formCadastro.tipoInclusao = 'E';
-    this.buscarEquipes();
+    this.buscarEmpresas();
     return await this.modalCadastro.open();
   }
 }

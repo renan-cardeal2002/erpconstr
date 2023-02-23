@@ -86,7 +86,7 @@ export class CadastroUsuarioComponent extends BasicModulos implements OnInit {
     );
   }
   async buscarAplicacoes() {
-    let rota = '';
+    let rota = '/cog/buscarAplicacoes';
     this.requisicao.get(rota).subscribe(
       async (retorno: any) => {
         this.listagemAplicacoes = retorno;
@@ -184,7 +184,7 @@ export class CadastroUsuarioComponent extends BasicModulos implements OnInit {
   }
   async excluirAplicacaoUsuario(registro) {
     let rota =
-      '/cog/excluirAplicacaoUsuario?idUsuarioEmpresa=' +
+      '/cog/excluirAplicacaoUsuario?idUsuarioAplicacao=' +
       registro.idUsuarioAplicacao;
     this.requisicao.delete(rota).subscribe(
       async (retorno: any) => {

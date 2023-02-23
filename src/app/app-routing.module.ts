@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CadastroAplicacaoComponent } from './modulos/cadastro-aplicacao/cadastro-aplicacao.component';
+import { CadastroAplicacaoComponent } from './modulos/cog/cadastro-aplicacao/cadastro-aplicacao.component';
 import { CadastroEmpresasComponent } from './modulos/cog/cadastro-empresas/cadastro-empresas.component';
 import { CadastroEquipeComponent } from './modulos/cog/cadastro-equipe/cadastro-equipe.component';
 import { CadastroPessoaComponent } from './modulos/cog/cadastro-pessoa/cadastro-pessoa.component';

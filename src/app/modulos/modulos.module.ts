@@ -15,7 +15,7 @@ import { CadastroComprasComponent } from './cpa/cadastro-compras/cadastro-compra
 import { CadastroProdutosComponent } from './cog/cadastro-produtos/cadastro-produtos.component';
 import { CadastroEmpresasComponent } from './cog/cadastro-empresas/cadastro-empresas.component';
 import { MySqlComponent } from './cog/my-sql/my-sql.component';
-import { CadastroAplicacaoComponent } from './cadastro-aplicacao/cadastro-aplicacao.component';
+import { CadastroAplicacaoComponent } from './cog/cadastro-aplicacao/cadastro-aplicacao.component';
 
 @NgModule({
   declarations: [

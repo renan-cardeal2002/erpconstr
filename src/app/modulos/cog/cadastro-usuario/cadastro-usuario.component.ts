@@ -24,9 +24,12 @@ export class CadastroUsuarioComponent extends BasicModulos implements OnInit {
   public formCadastro: any = {};
   public formExclusao: any = {};
   public formIclusaoEmpresa: any = { idEmpresa: '' };
+  public formIclusaoAplicativo: any = { idAplicacao: '' };
   public listagemUsuarios: any = [];
   public listagemEmpresasUsuario: any = [];
+  public listagemAplicacoesUsuario: any = [];
   public listagemEmpresas: any = [];
+  public listagemAplicacoes: any = [];
 
   constructor(
     private requisicao: RequisicaoService,
@@ -64,11 +67,29 @@ export class CadastroUsuarioComponent extends BasicModulos implements OnInit {
       (retorno: any) => {}
     );
   }
+  async buscarAplicacoesUsuario(usuario) {
+    let rota = '/cog/buscarAplicacoesUsuario?idUsuario=' + usuario.idUsuario;
+    this.requisicao.get(rota).subscribe(
+      async (retorno: any) => {
+        this.listagemAplicacoesUsuario = retorno;
+      },
+      (retorno: any) => {}
+    );
+  }
   async buscarEmpresas() {
     let rota = '/cog/buscarEmpresas';
     this.requisicao.get(rota).subscribe(
       async (retorno: any) => {
         this.listagemEmpresas = retorno;
+      },
+      (retorno: any) => {}
+    );
+  }
+  async buscarAplicacoes() {
+    let rota = '';
+    this.requisicao.get(rota).subscribe(
+      async (retorno: any) => {
+        this.listagemAplicacoes = retorno;
       },
       (retorno: any) => {}
     );
@@ -111,6 +132,17 @@ export class CadastroUsuarioComponent extends BasicModulos implements OnInit {
   async cancelarRegistro(index) {
     this.listagemEmpresasUsuario.splice(index);
   }
+  async novoRegistroAplicacao(usuario) {
+    this.buscarAplicacoes();
+    this.listagemAplicacoesUsuario.push({
+      idUsuario: usuario,
+      idAplicacao: '',
+      editando: true,
+    });
+  }
+  async cancelarRegistroAplicacao(index) {
+    this.listagemAplicacoesUsuario.splice(index);
+  }
 
   async salvarEmpresaUsuario(registro) {
     let rota = '/cog/salvarEmpresaUsuario';
@@ -137,6 +169,31 @@ export class CadastroUsuarioComponent extends BasicModulos implements OnInit {
     );
   }
 
+  async salvarAplicacaoUsuario(registro) {
+    let rota = '/cog/salvarAplicacaoUsuario';
+    let param = {
+      idUsuario: registro.idUsuario,
+      idAplicacao: this.formIclusaoAplicativo.idAplicacao,
+    };
+    this.requisicao.post(rota, param).subscribe(
+      async (retorno: any) => {
+        await this.buscarAplicacoesUsuario(registro);
+      },
+      (retorno: any) => {}
+    );
+  }
+  async excluirAplicacaoUsuario(registro) {
+    let rota =
+      '/cog/excluirAplicacaoUsuario?idUsuarioEmpresa=' +
+      registro.idUsuarioAplicacao;
+    this.requisicao.delete(rota).subscribe(
+      async (retorno: any) => {
+        await this.buscarAplicacoesUsuario(registro);
+      },
+      (retorno: any) => {}
+    );
+  }
+
   async mostrarModalExclusao(param) {
     this.formExclusao = param;
     return await this.modalExclusao.open();
@@ -152,6 +209,7 @@ export class CadastroUsuarioComponent extends BasicModulos implements OnInit {
     this.formCadastro = registro;
     this.formCadastro.tipoInclusao = 'E';
     this.buscarEmpresasUsuario(registro);
+    this.buscarAplicacoesUsuario(registro);
     return await this.modalCadastro.open();
   }
 }

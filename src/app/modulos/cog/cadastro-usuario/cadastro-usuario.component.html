@@ -73,9 +73,9 @@
         </div>
     </div>
     <div class="row top-padrao" *ngIf="formCadastro.tipoInclusao=='E'">
-        <div class=" col-xl-12">
+        <div class="col-xl-6">
             <label>Vincular Empresas</label>
-            <div class="auto">
+            <div class="auto" style="max-height: 40vh;">
                 <table tablePadrao>
                     <thead>
                         <tr theadPadrao>
@@ -107,6 +107,51 @@
                                     <option value="">Selecione uma empresa</option>
                                     <option *ngFor="let e of listagemEmpresas" [value]="e.idEmpresa">
                                         {{e.idEmpresa}} - {{e.nome}}
+                                    </option>
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <label>Vincular Aplicações</label>
+            <div class="auto" style="max-height: 40vh;">
+                <table tablePadrao>
+                    <thead>
+                        <tr theadPadrao>
+                            <th>
+                                <botao-adicionar (buscaBotao)="novoRegistroAplicacao(formCadastro.idUsuario)"
+                                    toolTip="Vincular aplicativo">
+                                </botao-adicionar>
+                            </th>
+                            <th>Id Aplicação</th>
+                            <th>Id Sistema</th>
+                            <th>Nome</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let v of listagemAplicacoesUsuario; let i = index">
+                            <td *ngIf="!v.editando">
+                                <botao-excluir toolTip="Excluir vinculo" (buscaBotao)="excluirAplicacaoUsuario(v)">
+                                </botao-excluir>
+                            </td>
+                            <td *ngIf="v.editando">
+                                <botao-excluir toolTip="Cancelar" (buscaBotao)="cancelarRegistroAplicacao(v)">
+                                </botao-excluir>
+                                <botao-confirmar toolTip="Confirmar vinculo" (buscaBotao)="salvarAplicacaoUsuario(v)"
+                                    [icon]="true">
+                                </botao-confirmar>
+                            </td>
+                            <td *ngIf="!v.editando">{{v.idAplicacao}}</td>
+                            <td *ngIf="!v.editando">{{v.idSistema}}</td>
+                            <td *ngIf="!v.editando">{{v.nomeAplicativo}}</td>
+                            <td colspan="3" *ngIf="v.editando">
+                                <select class="form-control" [(ngModel)]="formIclusaoAplicativo.idAplicacao">
+                                    <option value="">Selecione um aplicativo</option>
+                                    <option *ngFor="let e of listagemAplicacoes" [value]="e.idAplicacao">
+                                        {{e.idAplicacao}} - {{e.idSitema}} - {{e.nomeAplicativo}}
                                     </option>
                                 </select>
                             </td>

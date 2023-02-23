@@ -36,6 +36,11 @@ export class CadastroEquipeComponent extends BasicModulos implements OnInit {
     this.buscarEquipes();
   }
 
+  mudouEmpresa(empresa) {
+    this.alteraEmpresaSelecionada(empresa);
+    this.buscarEquipes();
+  }
+
   async buscarEquipes() {
     this.carregando = true;
     let rota = '/cog/buscarEquipes?idEmpresa=' + this.idEmpresaSelecionada;

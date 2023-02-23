@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { BasicModulos } from 'src/app/classes/basic-modulos';
 import { RequisicaoService } from 'src/app/services/requisicao.service';
@@ -9,6 +9,7 @@ import { RequisicaoService } from 'src/app/services/requisicao.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent extends BasicModulos implements OnInit {
+  @Output() changeEmpresa: EventEmitter<any> = new EventEmitter();
   public listagemEmpresasUsuario: any = [];
 
   constructor(private router: Router, private requisicao: RequisicaoService) {
@@ -29,5 +30,8 @@ export class HeaderComponent extends BasicModulos implements OnInit {
       },
       (retorno: any) => {}
     );
+  }
+  alterarEmpresa(empresa) {
+    this.changeEmpresa.emit(empresa);
   }
 }

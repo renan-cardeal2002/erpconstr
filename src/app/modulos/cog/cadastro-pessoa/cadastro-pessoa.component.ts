@@ -48,6 +48,11 @@ export class CadastroPessoaComponent extends BasicModulos implements OnInit {
     await this.buscarPessoas();
   }
 
+  mudouEmpresa(empresa) {
+    this.alteraEmpresaSelecionada(empresa);
+    this.buscarPessoas();
+  }
+
   async buscarPessoas() {
     this.carregando = true;
     let rota = '/cog/buscarPessoas';

@@ -39,6 +39,11 @@ export class CadastroUsuarioComponent extends BasicModulos implements OnInit {
     this.buscarUsuarios();
   }
 
+  mudouEmpresa(empresa) {
+    this.alteraEmpresaSelecionada(empresa);
+    this.buscarUsuarios();
+  }
+
   async buscarUsuarios() {
     this.carregando = true;
     let rota = '/cog/buscarUsuarios';

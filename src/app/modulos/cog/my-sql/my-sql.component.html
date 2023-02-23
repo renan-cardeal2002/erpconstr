@@ -1,0 +1,31 @@
+<header-padrao></header-padrao>
+
+<div class="body top-padrao" *ngIf="carregando">
+    <carregar></carregar>
+</div>
+
+<div class="body top-padrao">
+    <h4>Requisição com o banco My SQL</h4>
+    <div class="input-group form-floating">
+        <textarea class="form-control" style="height: 45vh;" [(ngModel)]="script"></textarea>
+        <label>Script</label>
+        <button class="btn btn-secondary" (click)="buscarScript(script)">Buscar</button>
+    </div>
+    <label>Retorno</label>
+    <div style="height: 30vh; overflow: auto;">
+        <!--<textarea class="form-control" style="height: 35vh;" [(ngModel)]="retorno" disabled>
+        </textarea>-->
+        <table tablePadrao>
+            <thead>
+                <tr theadPadrao>
+                    <th *ngFor="let x of cabecalhos">{{x}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let y of retorno">
+                    <td *ngFor="let x of cabecalhos">{{y[x]}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

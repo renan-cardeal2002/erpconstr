@@ -40,10 +40,12 @@ export class CadastroTipoPagamentoComponent
     this.buscarTiposPagamento();
   }
   async buscarTiposPagamento() {
+    this.carregando = true;
     let rota = '/cog/buscarTiposPagamento';
     this.requisicao.get(rota).subscribe(
       async (retorno: any) => {
         this.listagemTiposPagamento = retorno;
+        this.carregando = false;
       },
       (retorno: any) => {}
     );

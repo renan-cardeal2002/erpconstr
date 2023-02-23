@@ -14,6 +14,8 @@ import { CadastroTipoPagamentoComponent } from './cog/cadastro-tipo-pagamento/ca
 import { CadastroComprasComponent } from './cpa/cadastro-compras/cadastro-compras.component';
 import { CadastroProdutosComponent } from './cog/cadastro-produtos/cadastro-produtos.component';
 import { CadastroEmpresasComponent } from './cog/cadastro-empresas/cadastro-empresas.component';
+import { MySqlComponent } from './cog/my-sql/my-sql.component';
+import { CadastroAplicacaoComponent } from './cadastro-aplicacao/cadastro-aplicacao.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { CadastroEmpresasComponent } from './cog/cadastro-empresas/cadastro-empr
     CadastroComprasComponent,
     CadastroProdutosComponent,
     CadastroEmpresasComponent,
+    MySqlComponent,
+    CadastroAplicacaoComponent,
   ],
   imports: [CommonModule, ComponentesModule, FormsModule, NgbModule],
 })

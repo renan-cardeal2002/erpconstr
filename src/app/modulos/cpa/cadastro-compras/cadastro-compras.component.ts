@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { BasicModulos } from 'src/app/classes/basic-modulos';
 import { ModalCadastroComponent } from 'src/app/componentes/modais/modal-cadastro/modal-cadastro.component';
 import { ModalCadastroConfig } from 'src/app/componentes/modais/modal-cadastro/modal-cadastro.config';
 import { ModalExclusaoComponent } from 'src/app/componentes/modais/modal-exclusao/modal-exclusao.component';
@@ -9,7 +10,7 @@ import { ModalExclusaoConfig } from 'src/app/componentes/modais/modal-exclusao/m
   templateUrl: './cadastro-compras.component.html',
   styleUrls: ['./cadastro-compras.component.scss'],
 })
-export class CadastroComprasComponent implements OnInit {
+export class CadastroComprasComponent extends BasicModulos implements OnInit {
   @Input() public modalExcConfig: ModalExclusaoConfig = {
     modalTitle: 'Atenção',
   };
@@ -47,12 +48,15 @@ export class CadastroComprasComponent implements OnInit {
   public formExclusao: any = {};
   public abas = [{ nome: 'Produtos' }, { nome: 'Pagamentos' }];
 
-  constructor() {}
+  constructor() {
+    super();
+  }
 
   ngOnInit(): void {
     this.buscarCompras();
   }
   async buscarCompras() {
+    this.carregando = true;
     this.listagemCompras.push({
       idCompra: 1,
       idPessoa: 1,
@@ -64,6 +68,7 @@ export class CadastroComprasComponent implements OnInit {
       visualizar: false,
       status: 'P',
     });
+    this.carregando = false;
   }
   async buscarComprasProdutos(compra) {
     this.listagemProdutosCompra = [];

@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { BasicModulos } from 'src/app/classes/basic-modulos';
 import { ModalCadastroComponent } from 'src/app/componentes/modais/modal-cadastro/modal-cadastro.component';
 import { ModalCadastroConfig } from 'src/app/componentes/modais/modal-cadastro/modal-cadastro.config';
 import { ModalExclusaoComponent } from 'src/app/componentes/modais/modal-exclusao/modal-exclusao.component';
@@ -9,7 +10,7 @@ import { ModalExclusaoConfig } from 'src/app/componentes/modais/modal-exclusao/m
   templateUrl: './cadastro-produtos.component.html',
   styleUrls: ['./cadastro-produtos.component.scss'],
 })
-export class CadastroProdutosComponent implements OnInit {
+export class CadastroProdutosComponent extends BasicModulos implements OnInit {
   public modalExcConfig: ModalExclusaoConfig = {
     modalTitle: 'Atenção',
   };
@@ -23,17 +24,26 @@ export class CadastroProdutosComponent implements OnInit {
   public formExclusao: any = {};
   public listagemProdutos: any = [];
 
-  constructor() {}
+  constructor() {
+    super();
+  }
 
   ngOnInit(): void {
     this.buscarProdutos();
   }
 
+  mudouEmpresa(empresa) {
+    this.alteraEmpresaSelecionada(empresa);
+    this.buscarProdutos();
+  }
+
   async buscarProdutos() {
+    this.carregando = true;
     this.listagemProdutos.push({
       idProduto: 1,
       descricaoProduto: 'Fios amarelos 0.5mm 200mt',
     });
+    this.carregando = false;
   }
   async salvarProduto() {}
   async excluirProduto() {}

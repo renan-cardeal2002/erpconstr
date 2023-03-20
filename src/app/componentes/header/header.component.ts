@@ -17,6 +17,12 @@ export class HeaderComponent extends BasicModulos implements OnInit {
   }
 
   ngOnInit(): void {
+    let modoSalvo = window.localStorage.getItem('modo');
+    if (modoSalvo == 'dark') {
+      this.alterarTemaEscuro();
+    } else if (modoSalvo == 'light') {
+      this.alterarTemaClaro();
+    }
     this.buscarEmpresasUsuario(this.idUsuarioLogado);
   }
   navegar(rota) {
@@ -33,5 +39,13 @@ export class HeaderComponent extends BasicModulos implements OnInit {
   }
   alterarEmpresa(empresa) {
     this.changeEmpresa.emit(empresa);
+  }
+  alterarTemaEscuro() {
+    document.documentElement.setAttribute('data-bs-theme', 'dark');
+    window.localStorage.setItem('modo', 'dark');
+  }
+  alterarTemaClaro() {
+    document.documentElement.setAttribute('data-bs-theme', 'light');
+    window.localStorage.setItem('modo', 'light');
   }
 }

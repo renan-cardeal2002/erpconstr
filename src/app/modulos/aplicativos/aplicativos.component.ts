@@ -32,15 +32,13 @@ export class AplicativosComponent extends BasicModulos implements OnInit {
     this.requisicao.get(rota).subscribe(
       async (retorno: any) => {
         this.aplicativos = retorno;
-
-        console.log(retorno);
       },
       (retorno: any) => {}
     );
   }
   getColor(sistema: any): any {
     let colors = [
-      '#899DB6',
+      '#535f6e',
       '#0000ff8c',
       '#ffc107',
       '#FE533A',

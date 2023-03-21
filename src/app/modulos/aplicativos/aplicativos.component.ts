@@ -32,6 +32,7 @@ export class AplicativosComponent extends BasicModulos implements OnInit {
     this.requisicao.get(rota).subscribe(
       async (retorno: any) => {
         this.aplicativos = retorno;
+        console.log(retorno);
       },
       (retorno: any) => {}
     );

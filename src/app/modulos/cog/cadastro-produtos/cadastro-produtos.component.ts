@@ -1,9 +1,11 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { BasicModulos } from 'src/app/classes/basic-modulos';
 import { ModalCadastroComponent } from 'src/app/componentes/modais/modal-cadastro/modal-cadastro.component';
 import { ModalCadastroConfig } from 'src/app/componentes/modais/modal-cadastro/modal-cadastro.config';
 import { ModalExclusaoComponent } from 'src/app/componentes/modais/modal-exclusao/modal-exclusao.component';
 import { ModalExclusaoConfig } from 'src/app/componentes/modais/modal-exclusao/modal-exclusao.config';
+import { RequisicaoService } from 'src/app/services/requisicao.service';
 
 @Component({
   selector: 'app-cadastro-produtos',
@@ -24,7 +26,7 @@ export class CadastroProdutosComponent extends BasicModulos implements OnInit {
   public formExclusao: any = {};
   public listagemProdutos: any = [];
 
-  constructor() {
+  constructor(private requisicao: RequisicaoService) {
     super();
   }
 
@@ -39,13 +41,21 @@ export class CadastroProdutosComponent extends BasicModulos implements OnInit {
 
   async buscarProdutos() {
     this.carregando = true;
-    this.listagemProdutos.push({
-      idProduto: 1,
-      descricaoProduto: 'Fios amarelos 0.5mm 200mt',
-    });
-    this.carregando = false;
+    let rota = '/cog/buscarProdutos' + this.idEmpresaSelecionada;
+
+    this.requisicao.get(rota).subscribe(
+      (retorno: any) => {
+        this.listagemProdutos = retorno;
+        this.carregando = false;
+      },
+      (retorno: HttpErrorResponse) => {}
+    );
   }
-  async salvarProduto() {}
+  async salvarProduto(registro, modal) {
+    let rota = '';
+    let param = {};
+    //this.requisicao.post(rota, param);
+  }
   async excluirProduto() {}
 
   async mostrarModalExclusao(param) {

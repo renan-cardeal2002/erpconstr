@@ -17,13 +17,13 @@ export class CadastroProdutosComponent extends BasicModulos implements OnInit {
     modalTitle: 'Atenção',
   };
   public modalCadConfig: ModalCadastroConfig = {
-    modalTitle: 'Cadastro de usuários',
+    modalTitle: 'Cadastro de produtos',
   };
   @ViewChild('modalExclusao') public modalExclusao: ModalExclusaoComponent;
   @ViewChild('modalCadastro') private modalCadastro: ModalCadastroComponent;
 
-  public formCadastro: any = {};
-  public formExclusao: any = {};
+  public formCadastro: any;
+  public formExclusao: any;
   public listagemProdutos: any = [];
 
   constructor(private requisicao: RequisicaoService) {
@@ -41,7 +41,7 @@ export class CadastroProdutosComponent extends BasicModulos implements OnInit {
 
   async buscarProdutos() {
     this.carregando = true;
-    let rota = '/cog/buscarProdutos' + this.idEmpresaSelecionada;
+    let rota = '/cog/buscarProdutos?idEmpresa=' + this.idEmpresaSelecionada;
 
     this.requisicao.get(rota).subscribe(
       (retorno: any) => {
@@ -52,11 +52,37 @@ export class CadastroProdutosComponent extends BasicModulos implements OnInit {
     );
   }
   async salvarProduto(registro, modal) {
-    let rota = '';
-    let param = {};
-    //this.requisicao.post(rota, param);
+    let rota = '/cog/salvarProduto';
+    let param = {
+      tipoInclusao: registro.tipoInclusao,
+      idProduto: registro.idProduto,
+      idEmpresa: this.idEmpresaSelecionada,
+      descricao: registro.descricaoProduto,
+      situacao: registro.situacao,
+    };
+    this.requisicao.post(rota, param).subscribe(
+      async (retorno: any) => {
+        await this.buscarProdutos();
+        this.fecharModal(modal);
+      },
+      (retorno: HttpErrorResponse) => {}
+    );
   }
-  async excluirProduto() {}
+  async excluirProduto(registro, modal) {
+    let rota =
+      '/cog/excluirProduto?idProduto=' +
+      registro.idProduto +
+      '&idEmpresa=' +
+      this.idEmpresaSelecionada;
+
+    this.requisicao.delete(rota).subscribe(
+      async (retorno: any) => {
+        await this.buscarProdutos();
+        this.fecharModal(modal);
+      },
+      (retorno: any) => {}
+    );
+  }
 
   async mostrarModalExclusao(param) {
     this.formExclusao = param;
@@ -65,6 +91,7 @@ export class CadastroProdutosComponent extends BasicModulos implements OnInit {
   async mostrarModalCadastro() {
     this.formCadastro = {};
     this.formCadastro.tipoInclusao = 'I';
+    this.formCadastro.situacao = 'A';
     return await this.modalCadastro.open();
   }
   async mostrarModalEdicao(registro) {

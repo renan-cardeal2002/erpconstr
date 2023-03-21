@@ -25,8 +25,8 @@
             <thead>
                 <tr theadPadrao>
                     <th>
-                        <botao-adicionar (buscaBotao)="mostrarModalCadastro()"
-                            toolTip="Incluir produto"></botao-adicionar>
+                        <botao-adicionar (buscaBotao)="mostrarModalCadastro()" toolTip="Incluir produto">
+                        </botao-adicionar>
                     </th>
                     <th>Id Produto</th>
                     <th>Descrição Produto</th>
@@ -46,7 +46,8 @@
     </div>
 </div>
 
-<modal-cadastro #modalCadastro [modalConfig]="modalCadConfig" [bodyTemplate]="modalCadastroBody">
+<modal-cadastro #modalCadastro [modalConfig]="modalCadConfig" [bodyTemplate]="modalCadastroBody"
+    (funcaoRecebida)="salvarProduto(formCadastro, modalCadastro)">
 </modal-cadastro>
 <ng-template #modalCadastroBody>
     <div class="row">
@@ -56,14 +57,24 @@
                 <label>Id Produto</label>
             </div>
         </div>
-        <div class="col-xl-8">
+        <div class="col-xl-5">
             <div class="form-floating">
                 <input class="form-control" type="text" [(ngModel)]="formCadastro.descricaoProduto" maxlength="30">
                 <label>Descrição Produto</label>
             </div>
         </div>
+        <div class="col-xl-3">
+            <div class="form-floating">
+                <select class="form-control" [(ngModel)]="formCadastro.situacao">
+                    <option value="A">Ativo</option>
+                    <option value="I">Inativo</option>
+                </select>
+                <label>Situação</label>
+            </div>
+        </div>
     </div>
 </ng-template>
-<modal-exclusao #modalExclusao [modalConfig]="modalExcConfig">
+<modal-exclusao #modalExclusao [modalConfig]="modalExcConfig"
+    (funcaoRecebida)="excluirProduto(formExclusao, modalExclusao)">
     Deseja realmente excluir o item selecionado?
 </modal-exclusao>

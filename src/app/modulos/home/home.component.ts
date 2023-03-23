@@ -16,5 +16,11 @@ export class HomeComponent extends BasicModulos implements OnInit {
 
   async mudouEmpresa(empresa) {
     this.alteraEmpresaSelecionada(empresa);
+    (await this.aplicativosService.buscarAplicacoesUsuario(empresa)).subscribe(
+      (retorno) => {
+        this.aplicativos = retorno;
+      },
+      (retorno) => {}
+    );
   }
 }

@@ -34,7 +34,7 @@ export class AplicativosComponent extends BasicModulos implements OnInit {
       (retorno) => {}
     );
   }
-  async buscarSistemas() {}
+  async buscarSistemasUsuario() {}
 
   getColor(sistema: any): any {
     let colors = [

@@ -12,11 +12,15 @@ export class AplicativosService extends BasicModulos {
   }
 
   async buscarAplicacoesUsuario(empresa?) {
+    let idEmpresa = this.idEmpresaSelecionada;
+    if (empresa) {
+      idEmpresa = empresa;
+    }
     let rota =
       '/cog/buscarAplicacoesUsuario?idUsuario=' +
       this.idUsuarioLogado +
       '&idEmpresa=' +
-      this.idEmpresaSelecionada;
+      idEmpresa;
 
     return this.requisicao.get(rota);
   }

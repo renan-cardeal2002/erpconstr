@@ -9,6 +9,7 @@ export abstract class BasicModulos {
   @Input() idUsuarioLogado: any = window.localStorage.getItem('idUsuario');
   @Input() loginUsuarioLogado: any = window.localStorage.getItem('usuario');
   @Input() aplicativos: any = [];
+  @Input() dashboard: any = [];
   @Input() aplicativosFavoritos: any = [];
 
   public modalRef: NgbModalRef;

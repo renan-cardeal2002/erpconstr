@@ -23,7 +23,6 @@ export class MySqlComponent extends BasicModulos implements OnInit {
 
     this.requisicao.post(rota, param).subscribe(
       async (retorno: any) => {
-        console.log(retorno);
         this.retorno = retorno;
         if (this.retorno.length > 0) {
           this.cabecalhos = this.retornaKeys(retorno[0]);

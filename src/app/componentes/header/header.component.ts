@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { BasicModulos } from 'src/app/classes/basic-modulos';
+import { AplicativosService } from 'src/app/services/aplicativos.services';
 import { RequisicaoService } from 'src/app/services/requisicao.service';
 
 @Component({
@@ -37,7 +38,7 @@ export class HeaderComponent extends BasicModulos implements OnInit {
       (retorno: any) => {}
     );
   }
-  alterarEmpresa(empresa) {
+  async alterarEmpresa(empresa) {
     this.changeEmpresa.emit(empresa);
   }
   alterarTemaEscuro() {

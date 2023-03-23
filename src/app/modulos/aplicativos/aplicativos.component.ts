@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BasicModulos } from 'src/app/classes/basic-modulos';
-import { RequisicaoService } from 'src/app/services/requisicao.service';
+import { AplicativosService } from 'src/app/services/aplicativos.services';
 
 @Component({
   selector: 'aplicativos',
@@ -9,17 +9,16 @@ import { RequisicaoService } from 'src/app/services/requisicao.service';
   styleUrls: ['./aplicativos.component.scss'],
 })
 export class AplicativosComponent extends BasicModulos implements OnInit {
-  public carregando = false;
-
   public sistemas = [
     { idSistema: 'COG', nome: 'Controles Gerais' },
     { idSistema: 'CPA', nome: 'Compras' },
     { idSistema: 'FNC', nome: 'Financeiro' },
   ];
-  public aplicativos: any = [];
-  public aplicativosFavoritos = [];
 
-  constructor(private router: Router, private requisicao: RequisicaoService) {
+  constructor(
+    private router: Router,
+    private aplicativosService: AplicativosService
+  ) {
     super();
   }
 
@@ -28,15 +27,15 @@ export class AplicativosComponent extends BasicModulos implements OnInit {
   }
 
   async buscarAplicacoesUsuario() {
-    let rota = '/cog/buscarAplicacoesUsuario?idUsuario=' + this.idUsuarioLogado;
-    this.requisicao.get(rota).subscribe(
-      async (retorno: any) => {
+    (await this.aplicativosService.buscarAplicacoesUsuario()).subscribe(
+      (retorno: any) => {
         this.aplicativos = retorno;
-        console.log(retorno);
       },
-      (retorno: any) => {}
+      (retorno) => {}
     );
   }
+  async buscarSistemas() {}
+
   getColor(sistema: any): any {
     let colors = [
       '#535f6e',
@@ -102,8 +101,6 @@ export class AplicativosComponent extends BasicModulos implements OnInit {
     console.log(sistema);
   }
   selecionarAplicativo(aplicativo: any) {
-    console.log(aplicativo);
     this.router.navigate([`/${aplicativo.idAplicacao}`]);
   }
-  buscarSistemas() {}
 }

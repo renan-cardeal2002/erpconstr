@@ -4,6 +4,7 @@ import { ModalCadastroComponent } from 'src/app/componentes/modais/modal-cadastr
 import { ModalCadastroConfig } from 'src/app/componentes/modais/modal-cadastro/modal-cadastro.config';
 import { ModalExclusaoComponent } from 'src/app/componentes/modais/modal-exclusao/modal-exclusao.component';
 import { ModalExclusaoConfig } from 'src/app/componentes/modais/modal-exclusao/modal-exclusao.config';
+import { AplicativosService } from 'src/app/services/aplicativos.services';
 import { RequisicaoService } from 'src/app/services/requisicao.service';
 import { ToastService } from 'src/app/services/toast.service';
 @Component({
@@ -33,7 +34,8 @@ export class CadastroUsuarioComponent extends BasicModulos implements OnInit {
 
   constructor(
     private requisicao: RequisicaoService,
-    private toast: ToastService
+    private toast: ToastService,
+    private aplicativosService: AplicativosService
   ) {
     super();
   }
@@ -68,12 +70,11 @@ export class CadastroUsuarioComponent extends BasicModulos implements OnInit {
     );
   }
   async buscarAplicacoesUsuario(usuario) {
-    let rota = '/cog/buscarAplicacoesUsuario?idUsuario=' + usuario.idUsuario;
-    this.requisicao.get(rota).subscribe(
-      async (retorno: any) => {
+    (await this.aplicativosService.buscarAplicacoesUsuario()).subscribe(
+      (retorno: any) => {
         this.listagemAplicacoesUsuario = retorno;
       },
-      (retorno: any) => {}
+      (retorno) => {}
     );
   }
   async buscarEmpresas() {

@@ -47,7 +47,6 @@ export class CadastroEquipeComponent extends BasicModulos implements OnInit {
     this.requisicao.get(rota).subscribe(
       async (retorno: any) => {
         this.listagemEquipes = retorno;
-        console.log(retorno);
         this.carregando = false;
       },
       (retorno: any) => {}

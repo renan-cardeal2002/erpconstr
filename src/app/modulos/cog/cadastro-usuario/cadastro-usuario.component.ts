@@ -6,7 +6,6 @@ import { ModalExclusaoComponent } from 'src/app/componentes/modais/modal-exclusa
 import { ModalExclusaoConfig } from 'src/app/componentes/modais/modal-exclusao/modal-exclusao.config';
 import { AplicativosService } from 'src/app/services/aplicativos.services';
 import { RequisicaoService } from 'src/app/services/requisicao.service';
-import { ToastService } from 'src/app/services/toast.service';
 @Component({
   selector: 'app-cadastro-usuario',
   templateUrl: './cadastro-usuario.component.html',
@@ -34,7 +33,6 @@ export class CadastroUsuarioComponent extends BasicModulos implements OnInit {
 
   constructor(
     private requisicao: RequisicaoService,
-    private toast: ToastService,
     private aplicativosService: AplicativosService
   ) {
     super();

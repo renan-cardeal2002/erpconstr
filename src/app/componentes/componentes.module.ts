@@ -20,7 +20,6 @@ import { InputPadraoComponent } from './inputs/input-padrao/input-padrao.compone
 import { CarregarComponent } from './carregar/carregar.component';
 import { PaginacaoComponent } from './paginacao/paginacao.component';
 import { AlertaComponent } from './alerta/alerta.component';
-import { NotificacaoComponent } from './notificacao/notificacao.component';
 import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 
 @NgModule({
@@ -43,7 +42,6 @@ import { ProgressBarComponent } from './progress-bar/progress-bar.component';
     CarregarComponent,
     PaginacaoComponent,
     AlertaComponent,
-    NotificacaoComponent,
     ProgressBarComponent,
   ],
   imports: [CommonModule, FormsModule, NgbModule],
@@ -66,7 +64,6 @@ import { ProgressBarComponent } from './progress-bar/progress-bar.component';
     CarregarComponent,
     PaginacaoComponent,
     AlertaComponent,
-    NotificacaoComponent,
     ProgressBarComponent,
   ],
 })

@@ -5,7 +5,6 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 export abstract class BasicComponent {
   @Output() buscaBotao: EventEmitter<any> = new EventEmitter();
-  @Input() codEmpresaInicial: any = 1;
 
   @Input() classes: string = '';
   @Input() toolTip: string = '';

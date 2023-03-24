@@ -21,6 +21,7 @@ import { CarregarComponent } from './carregar/carregar.component';
 import { PaginacaoComponent } from './paginacao/paginacao.component';
 import { AlertaComponent } from './alerta/alerta.component';
 import { ProgressBarComponent } from './progress-bar/progress-bar.component';
+import { NotificacaoComponent } from './notificacao/notificacao.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { ProgressBarComponent } from './progress-bar/progress-bar.component';
     PaginacaoComponent,
     AlertaComponent,
     ProgressBarComponent,
+    NotificacaoComponent,
   ],
   imports: [CommonModule, FormsModule, NgbModule],
   exports: [
@@ -65,6 +67,7 @@ import { ProgressBarComponent } from './progress-bar/progress-bar.component';
     PaginacaoComponent,
     AlertaComponent,
     ProgressBarComponent,
+    NotificacaoComponent,
   ],
 })
 export class ComponentesModule {}

@@ -22,12 +22,14 @@ import { PaginacaoComponent } from './paginacao/paginacao.component';
 import { AlertaComponent } from './alerta/alerta.component';
 import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 import { NotificacaoComponent } from './notificacao/notificacao.component';
+import { OptimizeOnPushDirective } from '../directives/on-push.directive';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     TablePadraoDirective,
     TheadPadraoDirective,
+    OptimizeOnPushDirective,
     BotaoAdicionarComponent,
     BotaoExcluirComponent,
     BotaoEditarComponent,
@@ -51,6 +53,7 @@ import { NotificacaoComponent } from './notificacao/notificacao.component';
     HeaderComponent,
     TablePadraoDirective,
     TheadPadraoDirective,
+    OptimizeOnPushDirective,
     BotaoAdicionarComponent,
     BotaoExcluirComponent,
     BotaoEditarComponent,

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { NgbModalOptions, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   template: '',
@@ -8,9 +8,9 @@ export abstract class BasicModulos {
   @Input() idEmpresaSelecionada: any = window.localStorage.getItem('idEmpresa');
   @Input() idUsuarioLogado: any = window.localStorage.getItem('idUsuario');
   @Input() loginUsuarioLogado: any = window.localStorage.getItem('usuario');
-  @Input() aplicativos: any = [];
-  @Input() dashboard: any = [];
-  @Input() aplicativosFavoritos: any = [];
+  @Input() aplicativos: any[] = [];
+  @Input() dashboard: any[] = [];
+  @Input() aplicativosFavoritos: any[] = [];
 
   public modalRef: NgbModalRef;
   public carregando: boolean = false;
@@ -21,5 +21,8 @@ export abstract class BasicModulos {
   }
   async alteraEmpresaSelecionada(empresa) {
     this.idEmpresaSelecionada = empresa;
+  }
+  trackById(index: number, item: any) {
+    return item.id;
   }
 }

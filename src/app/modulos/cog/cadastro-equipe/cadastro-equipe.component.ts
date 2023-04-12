@@ -4,6 +4,7 @@ import { ModalCadastroComponent } from 'src/app/componentes/modais/modal-cadastr
 import { ModalCadastroConfig } from 'src/app/componentes/modais/modal-cadastro/modal-cadastro.config';
 import { ModalExclusaoComponent } from 'src/app/componentes/modais/modal-exclusao/modal-exclusao.component';
 import { ModalExclusaoConfig } from 'src/app/componentes/modais/modal-exclusao/modal-exclusao.config';
+import { PaginacaoService } from 'src/app/services/paginacao.service';
 import { RequisicaoService } from 'src/app/services/requisicao.service';
 
 @Component({
@@ -24,11 +25,14 @@ export class CadastroEquipeComponent extends BasicModulos implements OnInit {
   public listagemEquipes: { idEquipe: number; nome: string }[] = [];
   public formCadastro: any = {};
   public formExclusao: any = {};
-  public msgExclusao = false;
-  public paginaEquipe = 1;
-  public itensPaginaEquipe = 10;
+  public msgExclusao: boolean = false;
+  public paginaEquipe: number = 1;
+  public itensPaginaEquipe: number = 10;
 
-  constructor(private requisicao: RequisicaoService) {
+  constructor(
+    private requisicao: RequisicaoService,
+    public paginacaoService: PaginacaoService
+  ) {
     super();
   }
 
@@ -43,7 +47,7 @@ export class CadastroEquipeComponent extends BasicModulos implements OnInit {
 
   async buscarEquipes() {
     this.carregando = true;
-    let rota = '/cog/buscarEquipes?idEmpresa=' + this.idEmpresaSelecionada;
+    const rota = `/cog/buscarEquipes?idEmpresa=${this.idEmpresaSelecionada}`;
     this.requisicao.get(rota).subscribe(
       async (retorno: any) => {
         this.listagemEquipes = retorno;
@@ -54,11 +58,12 @@ export class CadastroEquipeComponent extends BasicModulos implements OnInit {
   }
 
   async salvarEquipe(registro, modal) {
-    let rota = '/cog/salvarEquipe';
-    let param = {
-      idEquipe: registro.idEquipe,
-      nome: registro.nome,
-      tipoInclusao: registro.tipoInclusao,
+    const { idEquipe, nome, tipoInclusao } = registro;
+    const rota = '/cog/salvarEquipe';
+    const param = {
+      idEquipe,
+      nome,
+      tipoInclusao,
       idEmpresa: this.idEmpresaSelecionada,
     };
 
@@ -71,20 +76,15 @@ export class CadastroEquipeComponent extends BasicModulos implements OnInit {
     );
   }
   async excluirEquipe(registro, modal) {
-    let rota =
-      '/cog/excluirEquipe?idEquipe=' +
-      registro.idEquipe +
-      '&idEmpresa=' +
-      this.idEmpresaSelecionada;
+    const { idEquipe } = registro;
+    const rota = `/cog/excluirEquipe?idEquipe=${idEquipe}&idEmpresa=${this.idEmpresaSelecionada}`;
 
-    this.requisicao.delete(rota).subscribe(
-      async (retorno: any) => {
-        await this.buscarEquipes();
-        this.fecharModal(modal);
-        this.msgExclusao = true;
-      },
-      (retorno: any) => {}
-    );
+    try {
+      await this.requisicao.delete(rota).toPromise();
+      await this.buscarEquipes();
+      this.fecharModal(modal);
+      this.msgExclusao = true;
+    } catch (erro) {}
   }
 
   async mostrarModalExclusao(param) {

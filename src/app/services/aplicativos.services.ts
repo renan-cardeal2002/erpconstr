@@ -11,7 +11,7 @@ export class AplicativosService extends BasicModulos {
     super();
   }
 
-  async buscarAplicacoesUsuario(empresa?) {
+  buscarAplicacoesUsuario(empresa?) {
     let idEmpresa = this.idEmpresaSelecionada;
     if (empresa) {
       idEmpresa = empresa;

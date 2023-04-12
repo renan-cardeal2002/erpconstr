@@ -34,7 +34,7 @@
             </thead>
             <tbody>
                 <tr
-                    *ngFor="let e of listagemEquipes.slice(((paginaEquipe-1)*itensPaginaEquipe), ((paginaEquipe)*itensPaginaEquipe))">
+                    *ngFor="let e of paginacaoService.alteraListagemPaginada(listagemEquipes, paginaEquipe, itensPaginaEquipe); trackBy: trackById">
                     <td>
                         <botao-editar (buscaBotao)="mostrarModalEdicao(e)" toolTip="Editar equipe">
                         </botao-editar>

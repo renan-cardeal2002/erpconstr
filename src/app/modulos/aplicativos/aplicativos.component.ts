@@ -27,7 +27,7 @@ export class AplicativosComponent extends BasicModulos implements OnInit {
   }
 
   async buscarAplicacoesUsuario() {
-    (await this.aplicativosService.buscarAplicacoesUsuario()).subscribe(
+    this.aplicativosService.buscarAplicacoesUsuario().subscribe(
       (retorno: any) => {
         this.aplicativos = retorno;
       },

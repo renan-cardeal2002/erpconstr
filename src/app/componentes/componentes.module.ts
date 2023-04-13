@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { FormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { TablePadraoDirective } from '../directives/table-padrao.directive';
 import { TheadPadraoDirective } from '../directives/thead-padrao.directive';
 import { BotaoAdicionarComponent } from './botoes/botao-adicionar/botao-adicionar.component';

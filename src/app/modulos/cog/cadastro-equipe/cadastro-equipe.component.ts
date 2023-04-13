@@ -27,7 +27,7 @@ export class CadastroEquipeComponent extends BasicModulos implements OnInit {
   public formExclusao: any = {};
   public msgExclusao: boolean = false;
   public paginaEquipe: number = 1;
-  public itensPaginaEquipe: number = 10;
+  public itensPaginaEquipe: number = 5;
 
   constructor(
     private requisicao: RequisicaoService,

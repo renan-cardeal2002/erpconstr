@@ -23,6 +23,7 @@ import { AlertaComponent } from './alerta/alerta.component';
 import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 import { NotificacaoComponent } from './notificacao/notificacao.component';
 import { OptimizeOnPushDirective } from '../directives/on-push.directive';
+import { BotaoRecarregarComponent } from './botoes/botao-recarregar/botao-recarregar.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { OptimizeOnPushDirective } from '../directives/on-push.directive';
     AlertaComponent,
     ProgressBarComponent,
     NotificacaoComponent,
+    BotaoRecarregarComponent,
   ],
   imports: [CommonModule, FormsModule, NgbModule],
   exports: [
@@ -65,6 +67,7 @@ import { OptimizeOnPushDirective } from '../directives/on-push.directive';
     BotaoConfirmarComponent,
     BotaoCancelarComponent,
     BotaoVisualizarComponent,
+    BotaoRecarregarComponent,
     InputPadraoComponent,
     CarregarComponent,
     PaginacaoComponent,

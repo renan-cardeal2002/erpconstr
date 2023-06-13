@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { BasicModulos } from 'src/app/classes/basic-modulos';
-import { AplicativosService } from 'src/app/services/aplicativos.services';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +7,7 @@ import { AplicativosService } from 'src/app/services/aplicativos.services';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent extends BasicModulos implements OnInit {
-  constructor(private aplicativosService: AplicativosService) {
+  constructor() {
     super();
   }
 
@@ -16,11 +15,6 @@ export class HomeComponent extends BasicModulos implements OnInit {
 
   async mudouEmpresa(empresa) {
     this.alteraEmpresaSelecionada(empresa);
-    this.aplicativosService.buscarAplicacoesUsuario(empresa).subscribe(
-      (retorno: any) => {
-        this.aplicativos = retorno;
-      },
-      (retorno) => {}
-    );
+    this.aplicativos = window.localStorage.getItem('aplicacoes');
   }
 }

@@ -8,7 +8,7 @@ export abstract class BasicModulos {
   @Input() idEmpresaSelecionada: any = window.localStorage.getItem('idEmpresa');
   @Input() idUsuarioLogado: any = window.localStorage.getItem('idUsuario');
   @Input() loginUsuarioLogado: any = window.localStorage.getItem('usuario');
-  @Input() aplicativos: any[] = [];
+  @Input() aplicativos: any = [];
   @Input() dashboard: any[] = [];
   @Input() aplicativosFavoritos: any[] = [];
 

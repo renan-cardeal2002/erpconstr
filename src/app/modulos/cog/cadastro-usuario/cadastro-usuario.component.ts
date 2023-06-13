@@ -116,7 +116,7 @@ export class CadastroUsuarioComponent extends BasicModulos implements OnInit {
   async salvarEmpresaUsuario(registro, index) {
     this.formCadastro.empresas[index] = {
       idUsuario: registro.idUsuario,
-      idEmpresa: this.formIclusaoEmpresa.idEmpresa,
+      ...this.formIclusaoEmpresa.empresa,
       editando: false,
     };
   }
@@ -126,8 +126,8 @@ export class CadastroUsuarioComponent extends BasicModulos implements OnInit {
 
   async salvarAplicacaoUsuario(registro, index) {
     this.formCadastro.aplicacoes[index] = {
-      idUsuaridUsuario: registro.idUsuario,
-      idAplicacao: this.formIclusaoAplicativo.idAplicacao,
+      idUsuario: registro.idUsuario,
+      ...this.formIclusaoAplicativo.aplicacao,
       idEmpresa: this.formCadastro.empresas[0].idEmpresa,
       editando: false,
     };
@@ -142,6 +142,8 @@ export class CadastroUsuarioComponent extends BasicModulos implements OnInit {
   }
   async mostrarModalCadastro() {
     this.formCadastro = {};
+    this.formCadastro.empresas = [];
+    this.formCadastro.aplicacoes = [];
     this.formCadastro.tipoInclusao = 'I';
     return await this.modalCadastro.open();
   }

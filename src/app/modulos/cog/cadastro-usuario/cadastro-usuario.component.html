@@ -55,7 +55,7 @@
     <div class="row">
         <div class="col-xl-2">
             <div class="form-floating">
-                <input class="form-control" type="number" [(ngModel)]="formCadastro.idUsuario" [disabled]="true">
+                <input class="form-control" [(ngModel)]="formCadastro.idUsuario" [disabled]="true">
                 <label>Id Usuário</label>
             </div>
         </div>
@@ -72,7 +72,7 @@
             </div>
         </div>
     </div>
-    <div class="row top-padrao" *ngIf="formCadastro.tipoInclusao=='E'">
+    <div class="row top-padrao">
         <div class="col-xl-6">
             <label>Vincular Empresas</label>
             <div class="auto" style="max-height: 40vh;">
@@ -105,9 +105,9 @@
                                 </botao-confirmar>
                             </td>
                             <td colspan="2" *ngIf="v.editando">
-                                <select class="form-control" [(ngModel)]="formIclusaoEmpresa.idEmpresa">
+                                <select class="form-control" [(ngModel)]="formIclusaoEmpresa.empresa">
                                     <option value="">Selecione uma empresa</option>
-                                    <option *ngFor="let e of listagemEmpresas" [value]="e.idEmpresa">
+                                    <option *ngFor="let e of listagemEmpresas" [ngValue]="e">
                                         {{e.idEmpresa}} - {{e.nome}}
                                     </option>
                                 </select>
@@ -150,9 +150,9 @@
                             <td *ngIf="!v.editando">{{v.idSistema}}</td>
                             <td *ngIf="!v.editando">{{v.nomeAplicativo}}</td>
                             <td colspan="3" *ngIf="v.editando">
-                                <select class="form-control" [(ngModel)]="formIclusaoAplicativo.idAplicacao">
+                                <select class="form-control" [(ngModel)]="formIclusaoAplicativo.aplicacao">
                                     <option value="">Selecione um aplicativo</option>
-                                    <option *ngFor="let e of listagemAplicacoes" [value]="e.idAplicacao">
+                                    <option *ngFor="let e of listagemAplicacoes" [ngValue]="e">
                                         {{e.idAplicacao}} - {{e.idSistema}} - {{e.nomeAplicativo}}
                                     </option>
                                 </select>

@@ -27,12 +27,7 @@ export class AplicativosComponent extends BasicModulos implements OnInit {
   }
 
   async buscarAplicacoesUsuario() {
-    this.aplicativosService.buscarAplicacoesUsuario().subscribe(
-      (retorno: any) => {
-        this.aplicativos = retorno;
-      },
-      (retorno) => {}
-    );
+    this.aplicativos = JSON.parse(window.localStorage.getItem('aplicacoes'));
   }
   async buscarSistemasUsuario() {}
 

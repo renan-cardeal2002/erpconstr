@@ -19,25 +19,33 @@ export class LoginComponent implements OnInit {
 
     this.requisicao.get(rota).subscribe(
       async (retorno: any) => {
-        if (retorno.dadosLogin.temUser > 0) {
-          window.localStorage.setItem(
-            'idUsuario',
-            retorno.dadosLogin.idUsuario
-          );
+        try {
+          console.log(retorno.dadosLogin.aplicacoes);
+          window.localStorage.setItem('idUsuario', retorno.dadosLogin._id);
           window.localStorage.setItem('usuario', retorno.dadosLogin.login);
+          window.localStorage.setItem(
+            'aplicacoes',
+            JSON.stringify(retorno.dadosLogin.aplicacoes)
+          );
+          window.localStorage.setItem(
+            'empresas',
+            JSON.stringify(retorno.dadosLogin.empresas)
+          );
 
-          this.empresasUsuario = retorno.empresas;
+          this.empresasUsuario = retorno.dadosLogin.empresas;
+
           if (this.empresasUsuario.length > 0) {
-            this.selecionarEmpresa(retorno.empresas[0]);
+            this.selecionarEmpresa(retorno.dadosLogin.empresas[0]);
           } else {
             this.selecionarEmpresa('');
           }
 
           this.router.navigate(['/home']);
-        } else {
-        }
+        } catch (err) {}
       },
-      (retorno: any) => {}
+      (retorno: any) => {
+        console.log(retorno);
+      }
     );
   }
   async selecionarEmpresa(empresa) {

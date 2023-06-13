@@ -30,13 +30,17 @@ export class HeaderComponent extends BasicModulos implements OnInit {
     this.router.navigate([rota]);
   }
   async buscarEmpresasUsuario(usuario) {
-    let rota = '/cog/buscarEmpresasUsuario?idUsuario=' + usuario;
-    this.requisicao.get(rota).subscribe(
-      async (retorno: any) => {
-        this.listagemEmpresasUsuario = retorno;
-      },
-      (retorno: any) => {}
+    this.listagemEmpresasUsuario = JSON.parse(
+      window.localStorage.getItem('empresas')
     );
+    console.log(this.listagemEmpresasUsuario);
+    // let rota = '/cog/buscarEmpresasUsuario?idUsuario=' + usuario;
+    // this.requisicao.get(rota).subscribe(
+    //   async (retorno: any) => {
+    //     this.listagemEmpresasUsuario = retorno;
+    //   },
+    //   (retorno: any) => {}
+    // );
   }
   async alterarEmpresa(empresa) {
     this.changeEmpresa.emit(empresa);

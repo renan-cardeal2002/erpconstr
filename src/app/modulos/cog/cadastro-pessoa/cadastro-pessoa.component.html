@@ -61,7 +61,7 @@
     <div class="row">
         <div class="col-xl-2">
             <div class="form-floating">
-                <input class="form-control" type="number" [(ngModel)]="formCadastro.idPessoa" [disabled]="true">
+                <input class="form-control" [(ngModel)]="formCadastro.idPessoa" [disabled]="true">
                 <label>Id Pessoa</label>
             </div>
         </div>
@@ -136,24 +136,24 @@
     <div class="row top-padrao">
         <div class="col-xl-2">
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" [(ngModel)]="formCadastro.cliente">
+                <input class="form-check-input" type="checkbox" [(ngModel)]="formCadastro.flagCliente">
                 <label class="form-check-label">Cliente</label>
             </div>
         </div>
         <div class="col-xl-2">
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" [(ngModel)]="formCadastro.funcionario">
+                <input class="form-check-input" type="checkbox" [(ngModel)]="formCadastro.flagFuncionario">
                 <label class="form-check-label">Funcionário</label>
             </div>
         </div>
         <div class="col-xl-2">
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" [(ngModel)]="formCadastro.fornecedor">
+                <input class="form-check-input" type="checkbox" [(ngModel)]="formCadastro.flagFornecedor">
                 <label class="form-check-label">Fornecedor</label>
             </div>
         </div>
         <div class="col-xl-2">
-            <div class="form-check form-check-inline" *ngIf="formCadastro.funcionario">
+            <div class="form-check form-check-inline" *ngIf="formCadastro.flagFuncionario">
                 <input class="form-check-input" type="radio" name="inlineRadioOptions" value="E"
                     [(ngModel)]="formCadastro.tipoFuncionario">
                 <label class="form-check-label">Engenheiro</label>

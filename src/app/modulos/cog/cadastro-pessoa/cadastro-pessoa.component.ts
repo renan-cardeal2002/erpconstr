@@ -59,6 +59,7 @@ export class CadastroPessoaComponent extends BasicModulos implements OnInit {
     this.requisicao.get(rota).subscribe(
       async (retorno: any) => {
         this.listagemPessoas = retorno;
+        console.log(retorno);
         this.carregando = false;
       },
       (retorno: any) => {}
@@ -76,16 +77,18 @@ export class CadastroPessoaComponent extends BasicModulos implements OnInit {
   async salvarPessoa(registro, modal) {
     let rota = '/cog/salvarPessoa';
     let param = {
-      // idEmpresa: this.idEmpresaSelecionada,
       idPessoa: registro._id,
       tipoInclusao: registro.tipoInclusao,
       nome: registro.nome,
       cnpjCpf: registro.cnpjCpf,
       tipoPessoa: registro.tipoPessoa,
+      inscricaoEstadual: registro.inscricaoEstadual,
+      rg: registro.rg,
+      inscricaoMunicipal: registro.inscricaoMunicipal,
       situacao: registro.situacao,
-      funcionario: registro.funcionario,
-      cliente: registro.cliente,
-      fornecedor: registro.fornecedor,
+      flagFuncionario: registro.flagFuncionario,
+      flagCliente: registro.flagCliente,
+      flagFornecedor: registro.flagFornecedor,
       tipoFuncionario: registro.tipoFuncionario,
       equipe: registro.equipe,
     };

@@ -4,7 +4,7 @@ import { ModalCadastroComponent } from 'src/app/componentes/modais/modal-cadastr
 import { ModalCadastroConfig } from 'src/app/componentes/modais/modal-cadastro/modal-cadastro.config';
 import { ModalExclusaoComponent } from 'src/app/componentes/modais/modal-exclusao/modal-exclusao.component';
 import { ModalExclusaoConfig } from 'src/app/componentes/modais/modal-exclusao/modal-exclusao.config';
-import { AplicativosService } from 'src/app/services/aplicativos.services';
+// import { AplicativosService } from 'src/app/services/aplicativos.services';
 import { RequisicaoService } from 'src/app/services/requisicao.service';
 @Component({
   selector: 'app-cadastro-usuario',
@@ -26,14 +26,13 @@ export class CadastroUsuarioComponent extends BasicModulos implements OnInit {
   public formIclusaoEmpresa: any = { idEmpresa: '' };
   public formIclusaoAplicativo: any = { idAplicacao: '' };
   public listagemUsuarios: any = [];
-  public listagemEmpresasUsuario: any = [];
-  public listagemAplicacoesUsuario: any = [];
   public listagemEmpresas: any = [];
   public listagemAplicacoes: any = [];
 
+  public addEmpresa = false;
+
   constructor(
-    private requisicao: RequisicaoService,
-    private aplicativosService: AplicativosService
+    private requisicao: RequisicaoService // private aplicativosService: AplicativosService
   ) {
     super();
   }
@@ -53,15 +52,15 @@ export class CadastroUsuarioComponent extends BasicModulos implements OnInit {
     this.listagemUsuarios = await this.requisicao.get(rota).toPromise();
     this.carregando = false;
   }
-  async buscarEmpresasUsuario(usuario) {
-    let rota = `/cog/buscarEmpresasUsuario?idUsuario=${usuario.idUsuario}`;
-    this.listagemEmpresasUsuario = await this.requisicao.get(rota).toPromise();
-  }
-  async buscarAplicacoesUsuario(usuario) {
-    this.listagemAplicacoesUsuario = await this.aplicativosService
-      .buscarAplicacoesUsuario(undefined, usuario.idUsuario, true)
-      .toPromise();
-  }
+  // async buscarEmpresasUsuario(usuario) {
+  //   let rota = `/cog/buscarEmpresasUsuario?idUsuario=${usuario.idUsuario}`;
+  //   this.listagemEmpresasUsuario = await this.requisicao.get(rota).toPromise();
+  // }
+  // async buscarAplicacoesUsuario(usuario) {
+  //   this.listagemAplicacoesUsuario = await this.aplicativosService
+  //     .buscarAplicacoesUsuario(undefined, usuario.idUsuario, true)
+  //     .toPromise();
+  // }
   async buscarEmpresas() {
     const rota = '/cog/buscarEmpresas';
     this.listagemEmpresas = await this.requisicao.get(rota).toPromise();
@@ -77,8 +76,9 @@ export class CadastroUsuarioComponent extends BasicModulos implements OnInit {
       idUsuario: registro.idUsuario,
       login: registro.login,
       senha: registro.senha,
+      empresas: registro.empresas,
+      aplicacoes: registro.aplicacoes,
     };
-    console.log(this.formCadastro);
     await this.requisicao.post(rota, param).toPromise();
     await this.buscarUsuarios();
     this.fecharModal(modal);
@@ -92,60 +92,48 @@ export class CadastroUsuarioComponent extends BasicModulos implements OnInit {
 
   async novoRegistro(usuario) {
     await this.buscarEmpresas();
-    this.listagemEmpresasUsuario.push({
+    this.formCadastro.empresas.push({
       idUsuario: usuario,
       idEmpresa: '',
       editando: true,
     });
   }
   async cancelarRegistro(index) {
-    this.listagemEmpresasUsuario.splice(index);
+    this.formCadastro.empresas.splice(index, 1);
   }
   async novoRegistroAplicacao(usuario) {
     await this.buscarAplicacoes();
-    this.listagemAplicacoesUsuario.push({
+    this.formCadastro.aplicacoes.push({
       idUsuario: usuario,
       idAplicacao: '',
       editando: true,
     });
   }
   async cancelarRegistroAplicacao(index) {
-    this.listagemAplicacoesUsuario.splice(index);
+    this.formCadastro.aplicacoes.splice(index, 1);
   }
 
-  async salvarEmpresaUsuario(registro) {
-    const rota = '/cog/salvarEmpresaUsuario';
-    const param = {
+  async salvarEmpresaUsuario(registro, index) {
+    this.formCadastro.empresas[index] = {
       idUsuario: registro.idUsuario,
       idEmpresa: this.formIclusaoEmpresa.idEmpresa,
+      editando: false,
     };
-    await this.requisicao.post(rota, param).toPromise();
-    await this.buscarEmpresasUsuario(registro);
   }
-  async excluirEmpresaUsuario(registro) {
-    const rota =
-      '/cog/excluirEmpresaUsuario?idUsuarioEmpresa=' +
-      registro.idUsuarioEmpresa;
-    await this.requisicao.delete(rota).toPromise();
-    await this.buscarEmpresasUsuario(registro);
+  async excluirEmpresaUsuario(index) {
+    this.formCadastro.empresas.splice(index, 1);
   }
 
-  async salvarAplicacaoUsuario(registro) {
-    const rota = '/cog/salvarAplicacaoUsuario';
-    const param = {
-      idUsuario: registro.idUsuario,
+  async salvarAplicacaoUsuario(registro, index) {
+    this.formCadastro.aplicacoes[index] = {
+      idUsuaridUsuario: registro.idUsuario,
       idAplicacao: this.formIclusaoAplicativo.idAplicacao,
-      idEmpresa: this.listagemEmpresasUsuario[0].idEmpresa,
+      idEmpresa: this.formCadastro.empresas[0].idEmpresa,
+      editando: false,
     };
-    await this.requisicao.post(rota, param).toPromise();
-    await this.buscarAplicacoesUsuario(registro);
   }
-  async excluirAplicacaoUsuario(registro) {
-    const rota =
-      '/cog/excluirAplicacaoUsuario?idUsuarioAplicacao=' +
-      registro.idUsuarioAplicacao;
-    await this.requisicao.delete(rota).toPromise();
-    await this.buscarAplicacoesUsuario(registro);
+  async excluirAplicacaoUsuario(index) {
+    this.formCadastro.aplicacoes.splice(index, 1);
   }
 
   async mostrarModalExclusao(param) {
@@ -153,20 +141,17 @@ export class CadastroUsuarioComponent extends BasicModulos implements OnInit {
     return await this.modalExclusao.open();
   }
   async mostrarModalCadastro() {
-    this.listagemEmpresasUsuario = [];
     this.formCadastro = {};
     this.formCadastro.tipoInclusao = 'I';
     return await this.modalCadastro.open();
   }
   async mostrarModalEdicao(registro) {
-    this.listagemEmpresasUsuario = [];
     this.formCadastro = registro;
     this.formCadastro.idUsuario = registro.idUsuario
       ? registro.idUsuario
       : registro._id;
     this.formCadastro.tipoInclusao = 'E';
-    await this.buscarEmpresasUsuario(registro);
-    await this.buscarAplicacoesUsuario(registro);
+
     return await this.modalCadastro.open();
   }
 }

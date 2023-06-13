@@ -81,27 +81,29 @@
                         <tr theadPadrao>
                             <th>
                                 <botao-adicionar (click)="novoRegistro(formCadastro.idUsuario)"
-                                    toolTip="Incluir compra">
+                                    toolTip="Incluir empresa">
                                 </botao-adicionar>
                             </th>
                             <th>Id Empresa</th>
                             <th>Nome</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr *ngFor="let v of listagemEmpresasUsuario; let i = index">
-                            <td *ngIf="!v.editando">
-                                <botao-excluir (buscaBotao)="excluirEmpresaUsuario(v)" toolTip="Excluir vinculo">
+                    <tbody *ngFor="let v of formCadastro.empresas; let i = index">
+                        <tr *ngIf="!v.editando">
+                            <td>
+                                <botao-excluir (buscaBotao)="excluirEmpresaUsuario(i)" toolTip="Excluir vinculo">
                                 </botao-excluir>
                             </td>
-                            <td *ngIf="v.editando">
+                            <td>{{v.idEmpresa}}</td>
+                            <td>{{v.nome}}</td>
+                        </tr>
+                        <tr *ngIf="v.editando">
+                            <td>
                                 <botao-excluir toolTip="Cancelar" (buscaBotao)="cancelarRegistro(i)"></botao-excluir>
-                                <botao-confirmar (buscaBotao)="salvarEmpresaUsuario(v)" toolTip="Confirmar vinculo"
+                                <botao-confirmar (buscaBotao)="salvarEmpresaUsuario(v, i)" toolTip="Confirmar vinculo"
                                     [icon]="true">
                                 </botao-confirmar>
                             </td>
-                            <td *ngIf="!v.editando">{{v.idEmpresa}}</td>
-                            <td *ngIf="!v.editando">{{v.nome}}</td>
                             <td colspan="2" *ngIf="v.editando">
                                 <select class="form-control" [(ngModel)]="formIclusaoEmpresa.idEmpresa">
                                     <option value="">Selecione uma empresa</option>
@@ -132,15 +134,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let v of listagemAplicacoesUsuario; let i = index">
+                        <tr *ngFor="let v of formCadastro.aplicacoes; let i = index">
                             <td *ngIf="!v.editando">
-                                <botao-excluir toolTip="Excluir vinculo" (buscaBotao)="excluirAplicacaoUsuario(v)">
+                                <botao-excluir toolTip="Excluir vinculo" (buscaBotao)="excluirAplicacaoUsuario(i)">
                                 </botao-excluir>
                             </td>
                             <td *ngIf="v.editando">
                                 <botao-excluir toolTip="Cancelar" (buscaBotao)="cancelarRegistroAplicacao(v)">
                                 </botao-excluir>
-                                <botao-confirmar toolTip="Confirmar vinculo" (buscaBotao)="salvarAplicacaoUsuario(v)"
+                                <botao-confirmar toolTip="Confirmar vinculo" (buscaBotao)="salvarAplicacaoUsuario(v, i)"
                                     [icon]="true">
                                 </botao-confirmar>
                             </td>

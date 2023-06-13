@@ -55,7 +55,7 @@ export class CadastroPessoaComponent extends BasicModulos implements OnInit {
 
   async buscarPessoas() {
     this.carregando = true;
-    let rota = '/cog/buscarPessoas';
+    const rota = '/cog/buscarPessoas';
     this.requisicao.get(rota).subscribe(
       async (retorno: any) => {
         this.listagemPessoas = retorno;
@@ -65,20 +65,19 @@ export class CadastroPessoaComponent extends BasicModulos implements OnInit {
     );
   }
   async buscarEquipes() {
-    let rota = '/cog/buscarEquipes';
-    this.requisicao.get(rota).subscribe(
-      async (retorno: any) => {
-        this.listagemEquipes = retorno;
-      },
-      (retorno: any) => {}
-    );
+    let rota = '/cog/buscarEquipes?idEmpresa=' + this.idEmpresaSelecionada;
+    try {
+      this.listagemEquipes = await this.requisicao.get(rota).toPromise();
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async salvarPessoa(registro, modal) {
     let rota = '/cog/salvarPessoa';
     let param = {
-      idEmpresa: this.idEmpresaSelecionada,
-      idPessoa: registro.idPessoa,
+      // idEmpresa: this.idEmpresaSelecionada,
+      idPessoa: registro._id,
       tipoInclusao: registro.tipoInclusao,
       nome: registro.nome,
       cnpjCpf: registro.cnpjCpf,
@@ -88,19 +87,19 @@ export class CadastroPessoaComponent extends BasicModulos implements OnInit {
       cliente: registro.cliente,
       fornecedor: registro.fornecedor,
       tipoFuncionario: registro.tipoFuncionario,
-      idEquipe: registro.idEquipe,
+      equipe: registro.equipe,
     };
 
-    this.requisicao.post(rota, param).subscribe(
-      async (retorno: any) => {
-        await this.buscarPessoas();
-        this.fecharModal(modal);
-      },
-      (retorno: any) => {}
-    );
+    try {
+      await this.requisicao.post(rota, param).toPromise();
+      await this.buscarPessoas();
+      this.fecharModal(modal);
+    } catch (error) {
+      console.log(error);
+    }
   }
   async excluirPessoa(registro, modal) {
-    let rota = '/cog/excluirPessoa?idPessoa=' + registro.idPessoa;
+    let rota = '/cog/excluirPessoa?idPessoa=' + registro._id;
 
     this.requisicao.delete(rota).subscribe(
       async (retorno: any) => {
@@ -124,13 +123,14 @@ export class CadastroPessoaComponent extends BasicModulos implements OnInit {
     this.formCadastro.tipoInclusao = 'I';
     this.formCadastro.situacao = 'A';
     this.formCadastro.tipoPessoa = 'J';
-    this.buscarEquipes();
+    await this.buscarEquipes();
     return await this.modalCadastro.open();
   }
   async mostrarModalEdicao(registro) {
-    this.formCadastro = registro;
+    this.formCadastro = { ...registro };
+    this.formCadastro.idPessoa = registro._id;
     this.formCadastro.tipoInclusao = 'E';
-    this.buscarEquipes();
+    await this.buscarEquipes();
     return await this.modalCadastro.open();
   }
 }

@@ -43,7 +43,7 @@
                         <botao-excluir (buscaBotao)="mostrarModalExclusao(p)" toolTip="Excluir pessoa">
                         </botao-excluir>
                     </td>
-                    <td>{{p.idPessoa}}</td>
+                    <td>{{p._id}}</td>
                     <td>{{p.cnpjCpf}}</td>
                     <td>{{p.nome}}</td>
                     <td>{{p.tipoPessoa}}</td>
@@ -126,8 +126,8 @@
         </div>
         <div class="col-xl-3" *ngIf="formCadastro.funcionario">
             <div class="form-floating">
-                <select class="form-control" [(ngModel)]="formCadastro.idEquipe">
-                    <option *ngFor="let e of listagemEquipes" [value]="e.idEquipe">{{e.nome}}</option>
+                <select class="form-control" [(ngModel)]="formCadastro.equipe">
+                    <option *ngFor="let e of listagemEquipes" [ngValue]="e">{{e.nome}}</option>
                 </select>
                 <label>Equipe</label>
             </div>

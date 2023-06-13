@@ -75,7 +75,7 @@ export class CadastroUsuarioComponent extends BasicModulos implements OnInit {
     this.fecharModal(modal);
   }
   async excluirUsuario(registro, modal) {
-    const rota = '/cog/excluirUsuario?idUsuario=' + registro.idUsuario;
+    const rota = '/cog/excluirUsuario?idUsuario=' + registro._id;
     await this.requisicao.delete(rota).toPromise();
     await this.buscarUsuarios();
     this.fecharModal(modal);

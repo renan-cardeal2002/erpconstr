@@ -52,15 +52,6 @@ export class CadastroUsuarioComponent extends BasicModulos implements OnInit {
     this.listagemUsuarios = await this.requisicao.get(rota).toPromise();
     this.carregando = false;
   }
-  // async buscarEmpresasUsuario(usuario) {
-  //   let rota = `/cog/buscarEmpresasUsuario?idUsuario=${usuario.idUsuario}`;
-  //   this.listagemEmpresasUsuario = await this.requisicao.get(rota).toPromise();
-  // }
-  // async buscarAplicacoesUsuario(usuario) {
-  //   this.listagemAplicacoesUsuario = await this.aplicativosService
-  //     .buscarAplicacoesUsuario(undefined, usuario.idUsuario, true)
-  //     .toPromise();
-  // }
   async buscarEmpresas() {
     const rota = '/cog/buscarEmpresas';
     this.listagemEmpresas = await this.requisicao.get(rota).toPromise();

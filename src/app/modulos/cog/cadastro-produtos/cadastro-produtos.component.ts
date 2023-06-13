@@ -41,47 +41,28 @@ export class CadastroProdutosComponent extends BasicModulos implements OnInit {
 
   async buscarProdutos() {
     this.carregando = true;
-    let rota = '/cog/buscarProdutos?idEmpresa=' + this.idEmpresaSelecionada;
-
-    this.requisicao.get(rota).subscribe(
-      (retorno: any) => {
-        this.listagemProdutos = retorno;
-        this.carregando = false;
-      },
-      (retorno: HttpErrorResponse) => {}
-    );
+    const rota = `/cog/buscarProdutos?idEmpresa=${this.idEmpresaSelecionada}`;
+    this.listagemProdutos = await this.requisicao.get(rota).toPromise();
+    this.carregando = false;
   }
   async salvarProduto(registro, modal) {
-    let rota = '/cog/salvarProduto';
-    let param = {
+    const rota = '/cog/salvarProduto';
+    const param = {
       tipoInclusao: registro.tipoInclusao,
       idProduto: registro.idProduto,
       idEmpresa: this.idEmpresaSelecionada,
       descricao: registro.descricaoProduto,
       situacao: registro.situacao,
     };
-    this.requisicao.post(rota, param).subscribe(
-      async (retorno: any) => {
-        await this.buscarProdutos();
-        this.fecharModal(modal);
-      },
-      (retorno: HttpErrorResponse) => {}
-    );
+    await this.requisicao.post(rota, param).toPromise();
+    await this.buscarProdutos();
+    this.fecharModal(modal);
   }
-  async excluirProduto(registro, modal) {
-    let rota =
-      '/cog/excluirProduto?idProduto=' +
-      registro.idProduto +
-      '&idEmpresa=' +
-      this.idEmpresaSelecionada;
-
-    this.requisicao.delete(rota).subscribe(
-      async (retorno: any) => {
-        await this.buscarProdutos();
-        this.fecharModal(modal);
-      },
-      (retorno: any) => {}
-    );
+  async excluirProduto({ idProduto }, modal) {
+    const rota = `/cog/excluirProduto?idProduto=${idProduto}&idEmpresa=${this.idEmpresaSelecionada}`;
+    await this.requisicao.delete(rota).toPromise();
+    await this.buscarProdutos();
+    this.fecharModal(modal);
   }
 
   async mostrarModalExclusao(param) {

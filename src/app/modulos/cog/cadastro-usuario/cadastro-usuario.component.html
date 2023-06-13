@@ -39,7 +39,7 @@
                         <botao-editar (buscaBotao)="mostrarModalEdicao(u)" toolTip="Editar usuário"></botao-editar>
                         <botao-excluir (buscaBotao)="mostrarModalExclusao(u)" toolTip="Excluir usuário"></botao-excluir>
                     </td>
-                    <td>{{u.idUsuario}}</td>
+                    <td>{{u.idUsuario ? u.idUsuario : u._id}}</td>
                     <td>{{u.login}}</td>
                     <td>{{u.senha}}</td>
                 </tr>

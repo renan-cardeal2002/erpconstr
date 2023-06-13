@@ -1,6 +1,6 @@
 import { RequisicaoService } from 'src/app/services/requisicao.service';
 
-import { Injectable, TemplateRef } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { BasicModulos } from '../classes/basic-modulos';
 
 @Injectable({
@@ -11,14 +11,17 @@ export class AplicativosService extends BasicModulos {
     super();
   }
 
-  buscarAplicacoesUsuario(empresa?) {
-    let idEmpresa = this.idEmpresaSelecionada;
-    if (empresa) {
-      idEmpresa = empresa;
+  buscarAplicacoesUsuario(empresa?, usuario?, passaNull = false) {
+    let idEmpresa = empresa ? empresa : this.idEmpresaSelecionada;
+    let idUsuario = usuario ? usuario : this.idUsuarioLogado;
+
+    if (passaNull) {
+      idEmpresa = undefined;
     }
+
     let rota =
       '/cog/buscarAplicacoesUsuario?idUsuario=' +
-      this.idUsuarioLogado +
+      idUsuario +
       '&idEmpresa=' +
       idEmpresa;
 

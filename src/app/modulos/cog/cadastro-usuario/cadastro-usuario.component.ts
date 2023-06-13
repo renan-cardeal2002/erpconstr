@@ -49,79 +49,49 @@ export class CadastroUsuarioComponent extends BasicModulos implements OnInit {
 
   async buscarUsuarios() {
     this.carregando = true;
-    let rota = '/cog/buscarUsuarios';
-    this.requisicao.get(rota).subscribe(
-      async (retorno: any) => {
-        this.listagemUsuarios = retorno;
-        this.carregando = false;
-      },
-      (retorno: any) => {}
-    );
+    const rota = '/cog/buscarUsuarios';
+    this.listagemUsuarios = await this.requisicao.get(rota).toPromise();
+    this.carregando = false;
   }
   async buscarEmpresasUsuario(usuario) {
-    let rota = '/cog/buscarEmpresasUsuario?idUsuario=' + usuario.idUsuario;
-    this.requisicao.get(rota).subscribe(
-      async (retorno: any) => {
-        this.listagemEmpresasUsuario = retorno;
-      },
-      (retorno: any) => {}
-    );
+    let rota = `/cog/buscarEmpresasUsuario?idUsuario=${usuario.idUsuario}`;
+    this.listagemEmpresasUsuario = await this.requisicao.get(rota).toPromise();
   }
   async buscarAplicacoesUsuario(usuario) {
-    (await this.aplicativosService.buscarAplicacoesUsuario()).subscribe(
-      (retorno: any) => {
-        this.listagemAplicacoesUsuario = retorno;
-      },
-      (retorno) => {}
-    );
+    this.listagemAplicacoesUsuario = await this.aplicativosService
+      .buscarAplicacoesUsuario(undefined, usuario.idUsuario, true)
+      .toPromise();
   }
   async buscarEmpresas() {
-    let rota = '/cog/buscarEmpresas';
-    this.requisicao.get(rota).subscribe(
-      async (retorno: any) => {
-        this.listagemEmpresas = retorno;
-      },
-      (retorno: any) => {}
-    );
+    const rota = '/cog/buscarEmpresas';
+    this.listagemEmpresas = await this.requisicao.get(rota).toPromise();
   }
   async buscarAplicacoes() {
-    let rota = '/cog/buscarAplicacoes';
-    this.requisicao.get(rota).subscribe(
-      async (retorno: any) => {
-        this.listagemAplicacoes = retorno;
-      },
-      (retorno: any) => {}
-    );
+    const rota = '/cog/buscarAplicacoes';
+    this.listagemAplicacoes = await this.requisicao.get(rota).toPromise();
   }
   async salvarUsuario(registro, modal) {
-    let rota = '/cog/salvarUsuario';
-    let param = {
+    const rota = '/cog/salvarUsuario';
+    const param = {
       tipoInclusao: registro.tipoInclusao,
       idUsuario: registro.idUsuario,
       login: registro.login,
       senha: registro.senha,
     };
-    this.requisicao.post(rota, param).subscribe(
-      async (retorno: any) => {
-        await this.buscarUsuarios();
-        this.fecharModal(modal);
-      },
-      (retorno: any) => {}
-    );
+    console.log(this.formCadastro);
+    await this.requisicao.post(rota, param).toPromise();
+    await this.buscarUsuarios();
+    this.fecharModal(modal);
   }
   async excluirUsuario(registro, modal) {
-    let rota = '/cog/excluirUsuario?idUsuario=' + registro.idUsuario;
-    this.requisicao.delete(rota).subscribe(
-      async (retorno: any) => {
-        await this.buscarUsuarios();
-        this.fecharModal(modal);
-      },
-      (retorno: any) => {}
-    );
+    const rota = '/cog/excluirUsuario?idUsuario=' + registro.idUsuario;
+    await this.requisicao.delete(rota).toPromise();
+    await this.buscarUsuarios();
+    this.fecharModal(modal);
   }
 
   async novoRegistro(usuario) {
-    this.buscarEmpresas();
+    await this.buscarEmpresas();
     this.listagemEmpresasUsuario.push({
       idUsuario: usuario,
       idEmpresa: '',
@@ -132,7 +102,7 @@ export class CadastroUsuarioComponent extends BasicModulos implements OnInit {
     this.listagemEmpresasUsuario.splice(index);
   }
   async novoRegistroAplicacao(usuario) {
-    this.buscarAplicacoes();
+    await this.buscarAplicacoes();
     this.listagemAplicacoesUsuario.push({
       idUsuario: usuario,
       idAplicacao: '',
@@ -144,53 +114,38 @@ export class CadastroUsuarioComponent extends BasicModulos implements OnInit {
   }
 
   async salvarEmpresaUsuario(registro) {
-    let rota = '/cog/salvarEmpresaUsuario';
-    let param = {
+    const rota = '/cog/salvarEmpresaUsuario';
+    const param = {
       idUsuario: registro.idUsuario,
       idEmpresa: this.formIclusaoEmpresa.idEmpresa,
     };
-    this.requisicao.post(rota, param).subscribe(
-      async (retorno: any) => {
-        await this.buscarEmpresasUsuario(registro);
-      },
-      (retorno: any) => {}
-    );
+    await this.requisicao.post(rota, param).toPromise();
+    await this.buscarEmpresasUsuario(registro);
   }
   async excluirEmpresaUsuario(registro) {
-    let rota =
+    const rota =
       '/cog/excluirEmpresaUsuario?idUsuarioEmpresa=' +
       registro.idUsuarioEmpresa;
-    this.requisicao.delete(rota).subscribe(
-      async (retorno: any) => {
-        await this.buscarEmpresasUsuario(registro);
-      },
-      (retorno: any) => {}
-    );
+    await this.requisicao.delete(rota).toPromise();
+    await this.buscarEmpresasUsuario(registro);
   }
 
   async salvarAplicacaoUsuario(registro) {
-    let rota = '/cog/salvarAplicacaoUsuario';
-    let param = {
+    const rota = '/cog/salvarAplicacaoUsuario';
+    const param = {
       idUsuario: registro.idUsuario,
       idAplicacao: this.formIclusaoAplicativo.idAplicacao,
+      idEmpresa: this.listagemEmpresasUsuario[0].idEmpresa,
     };
-    this.requisicao.post(rota, param).subscribe(
-      async (retorno: any) => {
-        await this.buscarAplicacoesUsuario(registro);
-      },
-      (retorno: any) => {}
-    );
+    await this.requisicao.post(rota, param).toPromise();
+    await this.buscarAplicacoesUsuario(registro);
   }
   async excluirAplicacaoUsuario(registro) {
-    let rota =
+    const rota =
       '/cog/excluirAplicacaoUsuario?idUsuarioAplicacao=' +
       registro.idUsuarioAplicacao;
-    this.requisicao.delete(rota).subscribe(
-      async (retorno: any) => {
-        await this.buscarAplicacoesUsuario(registro);
-      },
-      (retorno: any) => {}
-    );
+    await this.requisicao.delete(rota).toPromise();
+    await this.buscarAplicacoesUsuario(registro);
   }
 
   async mostrarModalExclusao(param) {
@@ -206,9 +161,12 @@ export class CadastroUsuarioComponent extends BasicModulos implements OnInit {
   async mostrarModalEdicao(registro) {
     this.listagemEmpresasUsuario = [];
     this.formCadastro = registro;
+    this.formCadastro.idUsuario = registro.idUsuario
+      ? registro.idUsuario
+      : registro._id;
     this.formCadastro.tipoInclusao = 'E';
-    this.buscarEmpresasUsuario(registro);
-    this.buscarAplicacoesUsuario(registro);
+    await this.buscarEmpresasUsuario(registro);
+    await this.buscarAplicacoesUsuario(registro);
     return await this.modalCadastro.open();
   }
 }
